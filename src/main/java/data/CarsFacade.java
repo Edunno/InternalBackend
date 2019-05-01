@@ -42,7 +42,7 @@ public class CarsFacade {
         return carList;
     }
 
-    public Collection<Cars> getByDistDrivenMAX(int dist) {
+    public Collection<Cars> getByDistDrivenMax(int dist) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByDistDrivenMAX");
         q.setParameter("distDriven", dist);
@@ -50,13 +50,14 @@ public class CarsFacade {
         return carList;
     }
 
-    public Collection<Cars> getByDistDrivenMIN(int dist) {
+    public Collection<Cars> getByDistDrivenMin(int dist) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByDistDrivenMIN");
         q.setParameter("distDriven", dist);
         Collection<Cars> carList = q.getResultList();
         return carList;
     }
+
     public Collection<Cars> getByBrand(String brand) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByBrand");
@@ -64,6 +65,7 @@ public class CarsFacade {
         Collection<Cars> carList = q.getResultList();
         return carList;
     }
+
     public Collection<Cars> getByModel(String model) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByModel");
@@ -71,6 +73,7 @@ public class CarsFacade {
         Collection<Cars> carList = q.getResultList();
         return carList;
     }
+
     public Collection<Cars> getByPriceMax(int price) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByPriceMAX");
@@ -78,4 +81,16 @@ public class CarsFacade {
         Collection<Cars> carList = q.getResultList();
         return carList;
     }
+
+    public Collection<Cars> getByPriceMin(int price) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Cars.findByPriceMin");
+        q.setParameter("price", price);
+        Collection<Cars> carList = q.getResultList();
+        return carList;
+    }
+
+    /*
+    The Following methods are used for data insertion.
+     */
 }

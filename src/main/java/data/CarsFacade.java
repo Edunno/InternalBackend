@@ -91,6 +91,19 @@ public class CarsFacade {
     }
 
     /*
-    The Following methods are used for data insertion.
+    The Following method is used for data insertion.
      */
+    
+    public Cars addCar(Cars car){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.persist(car);
+            em.getTransaction().commit();
+            return car;
+        }
+        finally{
+            em.close();
+        }
+    }
 }

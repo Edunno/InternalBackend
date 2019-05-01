@@ -35,7 +35,7 @@ public class CarsFacade {
         Collection<Cars> carList = q.getResultList();
         return carList;
     } 
-    public Collection<Cars> get(){
+    public Collection<Cars> getByDistDrivenMAX(int dist){
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("");
         Collection<Cars> carList = q.getResultList();

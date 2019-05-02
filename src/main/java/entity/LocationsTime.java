@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "LocationsTime.findAll", query = "SELECT l FROM LocationsTime l")
+    , @NamedQuery(name = "LocationsTime.findByTimeAndStatus", query ="SELECT l FROM LocationsTime l WHERE l.status = :status AND l.startsAt < :startsAt AND l.endsAt > :endsAt")
     , @NamedQuery(name = "LocationsTime.findById", query = "SELECT l FROM LocationsTime l WHERE l.id = :id")
     , @NamedQuery(name = "LocationsTime.findByName", query = "SELECT l FROM LocationsTime l WHERE l.name = :name")
     , @NamedQuery(name = "LocationsTime.findByStatus", query = "SELECT l FROM LocationsTime l WHERE l.status = :status")

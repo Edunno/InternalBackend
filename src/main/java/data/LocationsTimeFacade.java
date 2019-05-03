@@ -64,4 +64,33 @@ public class LocationsTimeFacade {
         Collection<LocationsTime> lTL = q.getResultList();
         return lTL;
     }
+    
+    /*
+    Datamanipulation:
+    */
+    
+    public LocationsTime addLocationsTime(LocationsTime lT){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.persist(lT);
+            em.getTransaction().commit();
+            return lT;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public LocationsTime deleteById(int id){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            LocationsTime lT = em.find(LocationsTime.class,(Integer) id);
+            em.remove(lT);
+            em.getTransaction().commit();
+            return lT;
+        }finally{
+            em.close();
+        }
+    }
 }

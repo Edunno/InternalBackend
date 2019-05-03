@@ -61,9 +61,9 @@ public class CarsFacadeTest {
         int id2 = 2;
         Cars c2 = cf.getCarById(id2);
         cf.deleteCarByID(id2);
+        cf.deleteCarByID(5);
 
     }
-
 
     @Test
     public void getCarById() {
@@ -71,20 +71,46 @@ public class CarsFacadeTest {
         int id = 1;
         Cars c = cf.getCarById(id);
         assertEquals((int) id, (int) c.getId());
+        System.out.println(c);
 
     }
 
     @Test
     public void getCarByBrand() {
         CarsFacade cf = setEMF();
+        String brand = "Volvo";
+        Collection<Cars> c = cf.getByBrand(brand);
+        assertTrue(c.equals(cf.getByBrand(brand)));
+        System.out.println(c);
+        
+
+    }
+    
+    @Test
+    public void getCarByMinPrice(){
+        CarsFacade cf = setEMF();
+        int price = 150;
+        Collection<Cars> c = cf.getByPriceMin(price);
+        assertTrue(c.equals(cf.getByPriceMin(price)));
+        System.out.println(c);
+    }
+
+    @Test
+    public void addCarTest() {
+        CarsFacade cf = setEMF();
+        Cars c = new Cars();
+        c.setId(5);
+        c.setBrand("Ford");
+        c.setModel("Focus");
+        c.setDistDriven(15000);
+        c.setComments("Knækket sidespejl");
+        c.setPrice(75);
+        Cars tc = cf.addCar(c);
+        assertEquals(c.getId(), tc.getId());
+        System.out.println(c.getBrand());
 
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     @Test
     public void addEntityManager() {
         CarsFacade cf = new CarsFacade();

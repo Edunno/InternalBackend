@@ -107,10 +107,11 @@ public class CarsFacade {
         }
     }
     
-    public Cars deleteCar(Cars car){
+    public Cars deleteCarByID(int id){
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
+            Cars car = em.find(Cars.class,(Integer) id);
             em.remove(car);
             em.getTransaction().commit();
             return car;

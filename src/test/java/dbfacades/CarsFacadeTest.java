@@ -57,31 +57,27 @@ public class CarsFacadeTest {
         CarsFacade cf = t1.setEMF();
         int id = 1;
         Cars c = cf.getCarById(id);
-        //cf.delete
+        cf.deleteCarByID(id);
+        int id2 = 2;
+        Cars c2 = cf.getCarById(id2);
+        cf.deleteCarByID(id2);
 
     }
 
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void getCarById() {
         CarsFacade cf = setEMF();
         int id = 1;
         Cars c = cf.getCarById(id);
-        assertEquals((int)id,(int)c.getId());
-        
+        assertEquals((int) id, (int) c.getId());
+
     }
-    
+
     @Test
-    public void getCarByBrand(){
+    public void getCarByBrand() {
         CarsFacade cf = setEMF();
-        
+
     }
 
     // TODO add test methods here.
@@ -92,7 +88,7 @@ public class CarsFacadeTest {
     @Test
     public void addEntityManager() {
         CarsFacade cf = new CarsFacade();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CA2DB");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         try {
             cf.addEntityManager(emf);
         } catch (Exception e) {
@@ -103,7 +99,7 @@ public class CarsFacadeTest {
 
     private CarsFacade setEMF() {
         CarsFacade cf = new CarsFacade();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CA2DB");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         cf.addEntityManager(emf);
         return cf;
     }

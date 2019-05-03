@@ -106,4 +106,16 @@ public class CarsFacade {
             em.close();
         }
     }
+    
+    public Cars deleteCar(Cars car){
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.remove(car);
+            em.getTransaction().commit();
+            return car;
+        } finally{
+            em.close();
+        }
+    }
 }

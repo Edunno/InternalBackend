@@ -13,10 +13,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import utility.PuSelector;
 
 /**
  *
@@ -33,7 +35,7 @@ public class CarsFacadeTest {
         CarsFacade cf = t1.setEMF();
 
         Cars c = new Cars();
-        c.setId(1);
+        c.setName("test");
         c.setBrand("Ford");
         c.setModel("Mondeo");
         c.setDistDriven(15000);
@@ -42,7 +44,7 @@ public class CarsFacadeTest {
         cf.addCar(c);
 
         Cars c2 = new Cars();
-        c2.setId(2);
+        c2.setName("test2");
         c.setBrand("VW");
         c.setModel("Golf");
         c.setDistDriven(20000);
@@ -110,11 +112,27 @@ public class CarsFacadeTest {
         System.out.println(c.getBrand());
 
     }
+    
+//    @Test
+//    public void deleteCarById(){
+//        CarsFacade cf = setEMF();
+//        List<Cars> cars = facade.getAllCars();
+//        facade.deleteCarByID(cars.get(0).getId());
+//        long count = facade.countCars();
+//        Assert.assertEquals(1, count);
+//    }
+//        CarsFacade cf = new CarsFacade();
+//        int id = 1;
+//        Cars c = cf.getCarById(id);
+//        cf.deleteCarByID(id);
+//        assertEquals();
+    
+            
 
     @Test
     public void addEntityManager() {
         CarsFacade cf = new CarsFacade();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+        EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu-unit-test");
         try {
             cf.addEntityManager(emf);
         } catch (Exception e) {
@@ -125,7 +143,7 @@ public class CarsFacadeTest {
 
     private CarsFacade setEMF() {
         CarsFacade cf = new CarsFacade();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+        EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu-unit-test");
         cf.addEntityManager(emf);
         return cf;
     }

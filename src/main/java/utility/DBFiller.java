@@ -323,9 +323,7 @@ public class DBFiller {
     public static void main(String[] args) {
         DBFiller d = new DBFiller();
 //        d.makeCarData();
-        //d.makeLocationTimeData();
-        Date a = new Date(2007, 9, 21);
-        System.out.println(a);
+        d.makeLocationTimeData();
     }
 
     private void makeCarData() {
@@ -340,18 +338,23 @@ public class DBFiller {
             System.out.println(carString);
             Cars c = g.fromJson(carString, Cars.class);
             cf.addCar(c);
-            if (c.getId() == 1) {
-                LocationsTime lT = new LocationsTime();
-                LocationsTimeFacade lTF = new LocationsTimeFacade();
-                lT.setCarId(c);
-                lT.setEndsAt(new Date(2019,9,20));
-                lT.setId(1);
-                lT.setStartsAt(new Date(2018,12,13));
-                lT.setStatus("Under repair");
-                lT.setName("Random");
-                lT.setLocLatitude(55770198);
-                lT.setLocLongitude(125107138);
-            }
         }
+    }
+
+    private void makeLocationTimeData() {
+
+        CarsFacade cf = new CarsFacade();
+        LocationsTime lT = new LocationsTime();
+        LocationsTimeFacade lTF = new LocationsTimeFacade();
+        Cars c = cf.getCarById(3);
+        lT.setCarId(c);
+        lT.setEndsAt(new Date(2019, 9, 20));
+        lT.setId(1);
+        lT.setStartsAt(new Date(2018, 12, 13));
+        lT.setStatus("Under repair");
+        lT.setName("Random");
+        lT.setLocLatitude(55770198);
+        lT.setLocLongitude(125107138);
+        lTF.addLocationsTime(lT);
     }
 }

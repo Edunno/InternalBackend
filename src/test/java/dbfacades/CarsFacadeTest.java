@@ -45,35 +45,43 @@ public class CarsFacadeTest {
 
         Cars c2 = new Cars();
         c2.setName("test2");
-        c.setBrand("VW");
-        c.setModel("Golf");
-        c.setDistDriven(20000);
-        c.setComments("Flænge i forrude");
-        c.setPrice(200);
+        c2.setBrand("VW");
+        c2.setModel("Golf");
+        c2.setDistDriven(20000);
+        c2.setComments("Flænge i forrude");
+        c2.setPrice(200);
         cf.addCar(c2);
     }
 
-    @AfterClass
-    public static void tearDownClass() {
-        CarsFacadeTest t1 = new CarsFacadeTest();
-        CarsFacade cf = t1.setEMF();
-        int id = 1;
-        Cars c = cf.getCarById(id);
-        cf.deleteCarByID(id);
-        int id2 = 2;
-        Cars c2 = cf.getCarById(id2);
-        cf.deleteCarByID(id2);
-        cf.deleteCarByID(5);
-
-    }
+//    @AfterClass
+//    public static void tearDownClass() {
+//        CarsFacadeTest t1 = new CarsFacadeTest();
+//        CarsFacade cf = t1.setEMF();
+//        Cars c = new Cars();
+//        cf.getByName("test");
+//        cf.deleteCarByID(c.getId());
+//        Cars c2 = new Cars();
+//        cf.getByName("test2");
+//        cf.deleteCarByID(c2.getId());
+//        Cars c3 = (Cars) cf.getByName("addCarTest");
+//        cf.deleteCarByID(c3.getId());
+//    }
 
     @Test
     public void getCarById() {
         CarsFacade cf = setEMF();
-        int id = 1;
-        Cars c = cf.getCarById(id);
-        assertEquals((int) id, (int) c.getId());
-        System.out.println(c);
+        Cars c = cf.getCarById(1);
+        assertTrue(c.getBrand().equals("Ford"));
+//        Cars c = cf.getByName("test").get(0);
+//        Cars cTest = cf.getCarById(c.getId());
+//        assertTrue(cTest.getName().equals(c.getName()));
+//        
+//        
+//        c.setName("test");
+//        c = cf.getByName("test").iterator().next();
+//        Cars testC = cf.getCarById(c.getId());
+//        assertTrue(testC.getName().contains("test"));
+        System.out.println("Car c= " + c.getName());
 
     }
 
@@ -83,18 +91,15 @@ public class CarsFacadeTest {
         String brand = "Volvo";
         Collection<Cars> c = cf.getByBrand(brand);
         assertTrue(c.equals(cf.getByBrand(brand)));
-        System.out.println(c);
-        
 
     }
-    
+
     @Test
-    public void getCarByMinPrice(){
+    public void getCarByMinPrice() {
         CarsFacade cf = setEMF();
         int price = 150;
         Collection<Cars> c = cf.getByPriceMin(price);
         assertTrue(c.equals(cf.getByPriceMin(price)));
-        System.out.println(c);
     }
 
     @Test
@@ -107,12 +112,12 @@ public class CarsFacadeTest {
         c.setDistDriven(15000);
         c.setComments("Knækket sidespejl");
         c.setPrice(75);
+        c.setName("addCarTest");
         Cars tc = cf.addCar(c);
         assertEquals(c.getId(), tc.getId());
-        System.out.println(c.getBrand());
 
     }
-    
+
 //    @Test
 //    public void deleteCarById(){
 //        CarsFacade cf = setEMF();
@@ -126,9 +131,6 @@ public class CarsFacadeTest {
 //        Cars c = cf.getCarById(id);
 //        cf.deleteCarByID(id);
 //        assertEquals();
-    
-            
-
     @Test
     public void addEntityManager() {
         CarsFacade cf = new CarsFacade();

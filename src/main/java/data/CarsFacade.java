@@ -3,6 +3,7 @@ package data;
 
 import entity.Cars;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -34,11 +35,11 @@ public class CarsFacade {
         return car;
     }
 
-    public Collection<Cars> getByName(String name) {
+    public List<Cars> getByName(String name) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("");
         q.setParameter("name", name);
-        Collection<Cars> carList = q.getResultList();
+        List<Cars> carList = q.getResultList();
         return carList;
     }
 

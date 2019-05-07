@@ -77,7 +77,7 @@ public class CarsFacade {
 
     public Collection<Cars> getByPriceMax(int price) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Cars.findByPriceMAX");
+        Query q = em.createNamedQuery("Cars.findByPriceMax");
         q.setParameter("price", price);
         Collection<Cars> carList = q.getResultList();
         return carList;

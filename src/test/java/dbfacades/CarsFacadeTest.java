@@ -95,13 +95,22 @@ public class CarsFacadeTest {
     }
 
     @Test
-    public void getCarByMinPrice() {
+    public void getCarsByMinPrice() {
         CarsFacade cf = setEMF();
         int price = 150;
         Collection<Cars> c = cf.getByPriceMin(price);
         assertTrue(c.equals(cf.getByPriceMin(price)));
     }
 
+    @Test
+    public void getCarsByMaxPrice(){
+        CarsFacade cf = setEMF();
+        int price = 150;
+        Collection<Cars> c = cf.getByPriceMax(price);
+        assertTrue(c.equals(cf.getByPriceMax(price)));
+        System.out.println(c);
+    }
+    
     @Test
     public void addCarTest() {
         CarsFacade cf = setEMF();

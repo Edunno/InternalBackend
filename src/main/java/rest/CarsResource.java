@@ -56,6 +56,18 @@ public class CarsResource {
         }
         return Response.ok().entity(gson.toJson(resP)).build();
     }
+    
+    @GET
+    @Path("getAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllCars(){
+        ArrayList<CarsDTO> resP = new ArrayList();
+        for(Cars c : (Collection<Cars>) cF.getAllCars()){
+            resP.add(new CarsDTO(c));
+        }
+        System.out.println(resP.get(0).getBrand());
+        return Response.ok().entity(gson.toJson(resP)).build();
+    }
 
     /**
      * PUT method for updating or creating an instance of CarsResource

@@ -322,7 +322,7 @@ public class DBFiller {
 
     public static void main(String[] args) {
         DBFiller d = new DBFiller();
-//        d.makeCarData();
+        d.makeCarData();
         d.makeLocationTimeData();
     }
 

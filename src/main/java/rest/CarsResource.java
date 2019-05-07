@@ -43,6 +43,7 @@ public class CarsResource {
 
     /**
      * Retrieves representation of an instance of rest.CarsResource
+     * @param brand
      * @return an instance of java.lang.String
      */
     @GET

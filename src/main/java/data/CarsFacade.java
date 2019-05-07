@@ -15,7 +15,7 @@ import utility.PuSelector;
  */
 public class CarsFacade {
 
-    private static EntityManagerFactory emf;
+    private static EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
     private static CarsFacade instance;
 
     public void addEntityManager(EntityManagerFactory emf) {

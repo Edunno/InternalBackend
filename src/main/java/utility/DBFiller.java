@@ -323,7 +323,7 @@ public class DBFiller {
 
     public static void main(String[] args) {
         DBFiller d = new DBFiller();
-        d.makeCarData();
+        //d.makeCarData();
         d.makeLocationTimeData();
     }
 
@@ -352,7 +352,7 @@ public class DBFiller {
         lT.setEndsAt(new Date(2019, 9, 20));
         lT.setId(1);
         lT.setStartsAt(new Date(2018, 12, 13));
-        lT.setStatus("Under repair");
+        lT.setStatus("Available");
         lT.setName("Random");
         lT.setLocLatitude(55770198);
         lT.setLocLongitude(125107138);

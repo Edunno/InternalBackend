@@ -4,6 +4,7 @@ package dto;
 
 import entity.Cars;
 import entity.Rentals;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -17,7 +18,7 @@ public class RentalsDTO {
     String status;
     Date startsAt;
     Date endsAt;
-    Collection<Cars> carsCollection;
+    ArrayList<CarsDTO> carsCollection;
     int userId;
     
     public RentalsDTO(Rentals a){
@@ -25,7 +26,11 @@ public class RentalsDTO {
         this.status = a.getStatus();
         this.startsAt= a.getStartsAt();
         this.endsAt = a.getEndsAt();
-        this.carsCollection = a.getCarsCollection();
+        if(!a.getCarsCollection().isEmpty()){
+            for(Cars aC : a.getCarsCollection()){
+                this.carsCollection.add(new CarsDTO(aC));
+            }
+        }
         this.userId = a.getUserId().getId();
     }
 }

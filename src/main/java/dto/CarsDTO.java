@@ -1,15 +1,14 @@
 /* Esben; DECK-CS */
-
 package dto;
 
 import entity.Cars;
 import entity.LocationsTime;
 import entity.Rentals;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author Esben
- * All rights belong to respective contributors.
+ * @author Esben All rights belong to respective contributors.
  */
 public class CarsDTO {
 
@@ -21,8 +20,8 @@ public class CarsDTO {
     int price;
     String comments;
     String createdAt;
-    Collection<Rentals> rentalList;
-    Collection<LocationsTime> locationTimeList;
+    ArrayList<RentalsDTO> rentalList;
+    ArrayList<LocationsTimeDTO> locationTimeList;
 
     public CarsDTO(Cars a) {
         this.id = a.getId();
@@ -33,10 +32,89 @@ public class CarsDTO {
         this.price = a.getPrice();
         this.comments = a.getComments();
         this.createdAt = a.getCreatedAt();
-        this.rentalList = a.getRentalsCollection();
-        this.locationTimeList = a.getLocationsTimeCollection();
+        if (!a.getRentalsCollection().isEmpty()) {
+            for(Rentals aR : a.getRentalsCollection()){
+                this.rentalList.add(new RentalsDTO(aR));
+            }
+        }
+        if (!a.getLocationsTimeCollection().isEmpty()) {
+            for(LocationsTime aT : a.getLocationsTimeCollection()){
+                this.locationTimeList.add(new LocationsTimeDTO(aT));
+            }
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getDistDriven() {
+        return distDriven;
+    }
+
+    public void setDistDriven(int distDriven) {
+        this.distDriven = distDriven;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public ArrayList<RentalsDTO> getRentalList() {
+        return rentalList;
+    }
+
+    public void setRentalList(ArrayList<RentalsDTO> rentalList) {
+        this.rentalList = rentalList;
+    }
+
+    public ArrayList<LocationsTimeDTO> getLocationTimeList() {
+        return locationTimeList;
+    }
+
+    public void setLocationTimeList(ArrayList<LocationsTimeDTO> locationTimeList) {
+        this.locationTimeList = locationTimeList;
     }
     
-   
-    
+
 }

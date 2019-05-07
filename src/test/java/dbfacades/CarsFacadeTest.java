@@ -71,16 +71,7 @@ public class CarsFacadeTest {
     public void getCarById() {
         CarsFacade cf = setEMF();
         Cars c = cf.getCarById(1);
-        assertTrue(c.getBrand().equals("Ford"));
-//        Cars c = cf.getByName("test").get(0);
-//        Cars cTest = cf.getCarById(c.getId());
-//        assertTrue(cTest.getName().equals(c.getName()));
-//        
-//        
-//        c.setName("test");
-//        c = cf.getByName("test").iterator().next();
-//        Cars testC = cf.getCarById(c.getId());
-//        assertTrue(testC.getName().contains("test"));
+        assertTrue(!c.getName().isEmpty());
         System.out.println("Car c= " + c.getName());
 
     }
@@ -91,7 +82,6 @@ public class CarsFacadeTest {
         String brand = "Volvo";
         Collection<Cars> c = cf.getByBrand(brand);
         assertTrue(c.equals(cf.getByBrand(brand)));
-
     }
 
     @Test

@@ -10,6 +10,7 @@
     <class>entity.LocationsTime</class>
     <class>entity.Rentals</class>
     <class>entity.Users</class>
+    <class>entity.Role</class>
     <properties>
       <!-- DONT ADD ANYTHING HERE
       This part will come from one of the pu_xxxx.properties files -->

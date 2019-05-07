@@ -32,7 +32,7 @@ import org.mindrot.jbcrypt.BCrypt;
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
     , @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id")
-    , @NamedQuery(name = "Users.findByUserName", query = "SELECT us from Users u WHERE u.userName = :userName")
+    , @NamedQuery(name = "Users.findByUserName", query = "SELECT u from Users u WHERE u.userName = :userName")
     , @NamedQuery(name = "Users.findByFullName", query = "SELECT u FROM Users u WHERE u.fullName = :fullName")
     , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
     , @NamedQuery(name = "Users.findByGender", query = "SELECT u FROM Users u WHERE u.gender = :gender")

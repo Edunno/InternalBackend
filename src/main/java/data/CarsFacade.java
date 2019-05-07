@@ -15,10 +15,19 @@ import utility.PuSelector;
  */
 public class CarsFacade {
 
-    EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
+    private static EntityManagerFactory emf;
+    private static CarsFacade instance;
 
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+
+    public static CarsFacade getInstance(EntityManagerFactory factory) {
+        if (instance == null) {
+            emf = factory;
+            instance = new CarsFacade();
+        }
+        return instance;
     }
 
     public Collection<Cars> getAllCars() {
@@ -95,29 +104,27 @@ public class CarsFacade {
     /*
     The Following method is used for data insertion.
      */
-    
-    public Cars addCar(Cars car){
+    public Cars addCar(Cars car) {
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
             em.persist(car);
             em.getTransaction().commit();
             return car;
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
-    
-    public Cars deleteCarByID(int id){
+
+    public Cars deleteCarByID(int id) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            Cars car = em.find(Cars.class,(Integer) id);
+            Cars car = em.find(Cars.class, (Integer) id);
             em.remove(car);
             em.getTransaction().commit();
             return car;
-        } finally{
+        } finally {
             em.close();
         }
     }

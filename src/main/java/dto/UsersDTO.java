@@ -3,8 +3,10 @@
 package dto;
 
 import entity.Rentals;
+import entity.Role;
 import entity.Users;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Esben
@@ -13,6 +15,7 @@ import java.util.Collection;
 public class UsersDTO {
     
     int id;
+    String userName;
     String fullName;
     String email;
     String gender;
@@ -21,9 +24,11 @@ public class UsersDTO {
     int longitude;
     int latitude;
     Collection<Rentals> rentalsCollcetion;
+    List<Role> role;
     
     public UsersDTO(Users a){
         this.id = a.getId();
+        this.userName = a.getUserName();
         this.fullName = a.getFullName();
         this.email = a.getEmail();
         this.gender = a.getGender();

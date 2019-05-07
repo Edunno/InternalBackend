@@ -7,10 +7,13 @@ package rest;
 
 import com.google.gson.Gson;
 import data.CarsFacade;
+import data.LocationsTimeFacade;
 import dto.CarsDTO;
 import entity.Cars;
+import entity.LocationsTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -67,6 +70,21 @@ public class CarsResource {
         }
         System.out.println(resP.get(0).getBrand());
         return Response.ok().entity(gson.toJson(resP)).build();
+    }
+    
+    @GET
+    @Path("/getbyperiod/{ystart}/{mstart}/{dstart}/{yend}/{mend}/{dend}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByTime(@PathParam("ystart") int ystart, @PathParam ("mstart") int mstart, @PathParam ("dstart") int dstart, @PathParam ("yend") int yend, @PathParam ("mend") int mend, @PathParam ("dend") int dend){
+        LocationsTimeFacade lF = new LocationsTimeFacade();
+        Date start = new Date(ystart,mstart,dstart);
+        Date end = new Date(yend,mend,dend);
+        Collection<LocationsTime> cLT = lF.getByDateAndStatus(start, end, "Available");
+        ArrayList<Cars> resp = new ArrayList();
+        for(LocationsTime l : cLT){
+            resp.add(l.getCarId());
+        }
+        return Response.ok().entity(gson.toJson(resp)).build();
     }
 
     /**

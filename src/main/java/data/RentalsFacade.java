@@ -8,13 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import utility.PuSelector;
 
 /**
  * @author Esben
  * All rights belong to respective contributors.
  */
 public class RentalsFacade {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+    EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
 
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;

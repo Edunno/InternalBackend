@@ -27,52 +27,21 @@ import utility.PuSelector;
  */
 public class CarsFacadeTest {
 
-//    public CarsFacadeTest() {
-//    }
-//    
-//    private static CarsFacade facade;
-//
-//    @BeforeClass
-//    public static void setupClass() {
-//         EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu-unit-test");
-//          facade = CarsFacade.getInstance(emf);
-//          TestUtils.setupCarFacadeTest(emf);
-//    }
-//        CarsFacadeTest t1 = new CarsFacadeTest();
-//        CarsFacade cf = t1.setEMF();
-//
-//        Cars c = new Cars();
-//        c.setName("test");
-//        c.setBrand("Ford");
-//        c.setModel("Mondeo");
-//        c.setDistDriven(15000);
-//        c.setComments("Bule i højre dør");
-//        c.setPrice(100);
-//        cf.addCar(c);
-//
-//        Cars c2 = new Cars();
-//        c2.setName("test2");
-//        c2.setBrand("VW");
-//        c2.setModel("Golf");
-//        c2.setDistDriven(20000);
-//        c2.setComments("Flænge i forrude");
-//        c2.setPrice(200);
-//        cf.addCar(c2);
-//    }
-//
-//    @AfterClass
-//    public static void tearDownClass() {
-//        CarsFacadeTest t1 = new CarsFacadeTest();
-//        CarsFacade cf = t1.setEMF();
-//        Cars c = new Cars();
-//        cf.getByName("test");
-//        cf.deleteCarByID(c.getId());
-//        Cars c2 = new Cars();
-//        cf.getByName("test2");
-//        cf.deleteCarByID(c2.getId());
-//        Cars c3 = (Cars) cf.getByName("addCarTest");
-//        cf.deleteCarByID(c3.getId());
-//    }
+    public CarsFacadeTest() {
+    }
+
+    private static CarsFacade facade;
+
+    @BeforeClass
+    public static void setupClass() {
+        EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu-unit-test");
+        facade = CarsFacade.getInstance(emf);
+        testutils.TestUtils.setupTestCars(emf);
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
 //
 //    @Test
 //    public void getCarById() {

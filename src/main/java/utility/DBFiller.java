@@ -349,13 +349,14 @@ public class DBFiller {
         LocationsTimeFacade lTF = new LocationsTimeFacade();
         Cars c = cf.getCarById(3);
         lT.setCarId(c);
-        lT.setEndsAt(new Date(2019, 9, 20));
-        lT.setId(1);
-        lT.setStartsAt(new Date(2018, 12, 13));
+        lT.setEndsAt(new Date(2019-1900, 9, 20));//OBS OBS OBS Årstallet i Date øges automatisk med 1900 !!!!!11!!11
+        lT.setId(5);
+        lT.setStartsAt(new Date(2017-1900, 11, 13));
         lT.setStatus("Available");
         lT.setName("Random");
         lT.setLocLatitude(55770198);
         lT.setLocLongitude(125107138);
+        System.out.println(new Date(2017, 11, 13).toString());
         lTF.addLocationsTime(lT);
         
     }

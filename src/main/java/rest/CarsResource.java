@@ -46,26 +46,27 @@ public class CarsResource {
 
     /**
      * Retrieves representation of an instance of rest.CarsResource
+     *
      * @param brand
      * @return an instance of java.lang.String
      */
     @GET
     @Path("/brand/{brand}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByBrand(@PathParam ("brand") String brand){
+    public Response getByBrand(@PathParam("brand") String brand) {
         ArrayList<CarsDTO> resP = new ArrayList();
-        for(Cars c : (Collection<Cars>) cF.getByBrand(brand)){
+        for (Cars c : (Collection<Cars>) cF.getByBrand(brand)) {
             resP.add(new CarsDTO(c));
         }
         return Response.ok().entity(gson.toJson(resP)).build();
     }
-    
+
     @GET
     @Path("getAll")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCars(){
+    public Response getAllCars() {
         ArrayList<CarsDTO> resP = new ArrayList();
-        for(Cars c : (Collection<Cars>) cF.getAllCars()){
+        for (Cars c : (Collection<Cars>) cF.getAllCars()) {
             CarsDTO nCar = new CarsDTO(c);
             nCar.cleanLists();
             resP.add(nCar);
@@ -73,30 +74,25 @@ public class CarsResource {
         System.out.println(resP.get(0).getBrand());
         return Response.ok().entity(gson.toJson(resP)).build();
     }
-    
+
     @GET
     @Path("/getbyperiod/{ystart}/{mstart}/{dstart}/{yend}/{mend}/{dend}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByTime(@PathParam("ystart") int ystart, @PathParam ("mstart") int mstart, @PathParam ("dstart") int dstart, @PathParam ("yend") int yend, @PathParam ("mend") int mend, @PathParam ("dend") int dend){
+    public Response getByTime(@PathParam("ystart") int ystart, @PathParam("mstart") int mstart, @PathParam("dstart") int dstart, @PathParam("yend") int yend, @PathParam("mend") int mend, @PathParam("dend") int dend) {
         LocationsTimeFacade lF = new LocationsTimeFacade();
-        Date start = new Date(ystart,mstart,dstart);
-        Date end = new Date(yend,mend,dend);
+        Date start = new Date(ystart, mstart, dstart);
+        Date end = new Date(yend, mend, dend);
         Collection<LocationsTime> cLT = lF.getByDateAndStatus(start, end, "Available");
-        Collection<Cars> cCol = null;
-        for(LocationsTime l : (Collection<LocationsTime>) lF.getByDateAndStatus(start, end, "Available")){
-            cCol.add(l.getCarId());
-        }
-        ArrayList<CarsDTO> resp = new ArrayList();
-        for(Cars c : cCol){
-            CarsDTO nC = new CarsDTO(c);
-            nC.cleanLists();
-            resp.add(nC);
+        Collection<Cars> resp = null;
+        for (LocationsTime l : (Collection<LocationsTime>) lF.getByDateAndStatus(start, end, "Available")) {
+            resp.add(l.getCarId());
         }
         return Response.ok().entity(gson.toJson(resp)).build();
     }
 
     /**
      * PUT method for updating or creating an instance of CarsResource
+     *
      * @param content representation for the resource
      */
     @PUT

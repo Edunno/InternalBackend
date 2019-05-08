@@ -2,6 +2,7 @@
 package data;
 
 import entity.LocationsTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -17,6 +18,12 @@ public class LocationsTimeFacade {
 
     EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
 
+    
+    public static void main(String[] args) {
+        LocationsTimeFacade lt = new LocationsTimeFacade();
+        Collection<LocationsTime> aLT = lt.getByDateAndStatus(20180713, 20190112, "Available");
+        System.out.println(aLT.iterator().next().getCarId().getBrand());
+    }
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;
     }

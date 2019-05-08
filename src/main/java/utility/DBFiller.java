@@ -347,10 +347,9 @@ public class DBFiller {
         CarsFacade cf = new CarsFacade();
         LocationsTime lT = new LocationsTime();
         LocationsTimeFacade lTF = new LocationsTimeFacade();
-        Cars c = cf.getCarById(380);
+        Cars c = cf.getCarById(3);
         lT.setCarId(c);
-        lT.setEndsAt(20190920);//OBS OBS OBS Årstallet i Date øges automatisk med 1900 !!!!!11!!11
-        lT.setId(5);
+        lT.setEndsAt(20190920);
         lT.setStartsAt(20171113);
         lT.setStatus("Available");
         lT.setName("Random");

@@ -18,7 +18,7 @@ public class LocationsTimeDTO {
     int endsAt;
     int longitude;
     int latitude;
-    CarsDTO carId;
+    int carId;
     
     public LocationsTimeDTO(LocationsTime a){
         this.id = a.getId();
@@ -28,7 +28,7 @@ public class LocationsTimeDTO {
         this.endsAt = a.getEndsAt();
         this.longitude = a.getLocLongitude();
         this.latitude = a.getLocLatitude();
-        this.carId = new CarsDTO(a.getCarId());
+        this.carId = new CarsDTO(a.getCarId()).getId();
     }
 
     public int getId() {
@@ -87,11 +87,11 @@ public class LocationsTimeDTO {
         this.latitude = latitude;
     }
 
-    public CarsDTO getCarId() {
+    public int getCarId() {
         return carId;
     }
 
-    public void setCarId(CarsDTO carId) {
+    public void setCarId(int carId) {
         this.carId = carId;
     }
     

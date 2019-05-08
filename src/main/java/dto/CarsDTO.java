@@ -116,5 +116,9 @@ public class CarsDTO {
         this.locationTimeList = locationTimeList;
     }
     
+    public void cleanLists(){
+        rentalList.clear();
+        locationTimeList.clear();
+    }
 
 }

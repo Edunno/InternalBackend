@@ -356,6 +356,7 @@ public class DBFiller {
         lT.setName("Random");
         lT.setLocLatitude(55770198);
         lT.setLocLongitude(125107138);
+        System.out.println(lT.getStartsAt().toString());
         lTF.addLocationsTime(lT);
         
     }

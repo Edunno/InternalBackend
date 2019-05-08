@@ -66,7 +66,9 @@ public class CarsResource {
     public Response getAllCars(){
         ArrayList<CarsDTO> resP = new ArrayList();
         for(Cars c : (Collection<Cars>) cF.getAllCars()){
-            resP.add(new CarsDTO(c));
+            CarsDTO nCar = new CarsDTO(c);
+            nCar.cleanLists();
+            resP.add(nCar);
         }
         System.out.println(resP.get(0).getBrand());
         return Response.ok().entity(gson.toJson(resP)).build();
@@ -80,9 +82,9 @@ public class CarsResource {
         Date start = new Date(ystart,mstart,dstart);
         Date end = new Date(yend,mend,dend);
         Collection<LocationsTime> cLT = lF.getByDateAndStatus(start, end, "Available");
-        ArrayList<CarsDTO> resp = new ArrayList();
+        ArrayList<Cars> resp = new ArrayList();
         for(LocationsTime l : cLT){
-            resp.add(new CarsDTO(l.getCarId()));
+            resp.add(l.getCarId());
         }
         return Response.ok().entity(gson.toJson(resp)).build();
     }

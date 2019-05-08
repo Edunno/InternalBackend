@@ -119,6 +119,7 @@ public class CarsDTO {
     public void cleanLists(){
         rentalList = null;
         locationTimeList = null;
+        System.gc();
     }
 
 }

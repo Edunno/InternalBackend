@@ -44,7 +44,7 @@ public class LocationsTimeFacade {
         return lTL;
     }
 
-    public Collection<LocationsTime> getByDateAndStatus(Date start, Date end, String status) {
+    public Collection<LocationsTime> getByDateAndStatus(int start, int end, String status) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("LocationsTime.findByTimeAndStatus");
         q.setParameter("startsAt", start);

@@ -323,7 +323,7 @@ public class DBFiller {
 
     public static void main(String[] args) {
         DBFiller d = new DBFiller();
-        //d.makeCarData();
+//        d.makeCarData();
         d.makeLocationTimeData();
     }
 
@@ -347,16 +347,15 @@ public class DBFiller {
         CarsFacade cf = new CarsFacade();
         LocationsTime lT = new LocationsTime();
         LocationsTimeFacade lTF = new LocationsTimeFacade();
-        Cars c = cf.getCarById(3);
+        Cars c = cf.getCarById(380);
         lT.setCarId(c);
-        lT.setEndsAt(new Date(2019-1900, 9, 20));//OBS OBS OBS Årstallet i Date øges automatisk med 1900 !!!!!11!!11
+        lT.setEndsAt(20190920);//OBS OBS OBS Årstallet i Date øges automatisk med 1900 !!!!!11!!11
         lT.setId(5);
-        lT.setStartsAt(new Date(2017-1900, 11, 13));
+        lT.setStartsAt(20171113);
         lT.setStatus("Available");
         lT.setName("Random");
         lT.setLocLatitude(55770198);
         lT.setLocLongitude(125107138);
-        System.out.println(new Date(2017, 11, 13).toString());
         lTF.addLocationsTime(lT);
         
     }

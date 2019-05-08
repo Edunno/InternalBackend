@@ -14,8 +14,8 @@ public class LocationsTimeDTO {
     int id;
     String name;
     String status;
-    Date startsAt;
-    Date endsAt;
+    int startsAt;
+    int endsAt;
     int longitude;
     int latitude;
     int carId;

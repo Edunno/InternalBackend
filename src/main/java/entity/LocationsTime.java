@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -42,6 +44,7 @@ public class LocationsTime implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Size(max = 255)
@@ -51,11 +54,9 @@ public class LocationsTime implements Serializable {
     @Column(name = "status")
     private String status;
     @Column(name = "starts_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startsAt;
+    private Integer startsAt;
     @Column(name = "ends_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endsAt;
+    private Integer endsAt;
     @Column(name = "loc_longitude")
     private Integer locLongitude;
     @Column(name = "loc_latitude")
@@ -95,19 +96,19 @@ public class LocationsTime implements Serializable {
         this.status = status;
     }
 
-    public Date getStartsAt() {
+    public Integer getStartsAt() {
         return startsAt;
     }
 
-    public void setStartsAt(Date startsAt) {
+    public void setStartsAt(Integer startsAt) {
         this.startsAt = startsAt;
     }
 
-    public Date getEndsAt() {
+    public Integer getEndsAt() {
         return endsAt;
     }
 
-    public void setEndsAt(Date endsAt) {
+    public void setEndsAt(Integer endsAt) {
         this.endsAt = endsAt;
     }
 

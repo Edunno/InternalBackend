@@ -82,11 +82,14 @@ public class CarsResource {
         Date start = new Date(ystart,mstart,dstart);
         Date end = new Date(yend,mend,dend);
         Collection<LocationsTime> cLT = lF.getByDateAndStatus(start, end, "Available");
-        
-        Collection<CarsDTO> resp = new ArrayList();
-        for(LocationsTime l : cLT){
-            CarsDTO nC = new CarsDTO(l.getCarId());
-//            nC.cleanLists();
+        Collection<Cars> cCol = null;
+        for(LocationsTime l : (Collection<LocationsTime>) lF.getByDateAndStatus(start, end, "Available")){
+            cCol.add(l.getCarId());
+        }
+        ArrayList<CarsDTO> resp = new ArrayList();
+        for(Cars c : cCol){
+            CarsDTO nC = new CarsDTO(c);
+            nC.cleanLists();
             resp.add(nC);
         }
         return Response.ok().entity(gson.toJson(resp)).build();

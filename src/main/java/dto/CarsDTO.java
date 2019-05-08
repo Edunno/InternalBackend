@@ -117,8 +117,8 @@ public class CarsDTO {
     }
     
     public void cleanLists(){
-        rentalList.clear();
-        locationTimeList.clear();
+        rentalList = null;
+        locationTimeList = null;
     }
 
 }

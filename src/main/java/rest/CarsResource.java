@@ -67,7 +67,7 @@ public class CarsResource {
         ArrayList<CarsDTO> resP = new ArrayList();
         for(Cars c : (Collection<Cars>) cF.getAllCars()){
             CarsDTO nCar = new CarsDTO(c);
-//            nCar.cleanLists();
+            nCar.cleanLists();
             resP.add(nCar);
         }
         System.out.println(resP.get(0).getBrand());

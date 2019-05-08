@@ -28,7 +28,7 @@ public class LocationsTimeDTO {
         this.endsAt = a.getEndsAt();
         this.longitude = a.getLocLongitude();
         this.latitude = a.getLocLatitude();
-        this.carId = new CarsDTO(a.getCarId()).getId();
+        this.carId = a.getCarId().getId();
     }
 
     public int getId() {

@@ -29,11 +29,11 @@ public class UserFacade {
         return instance;
     }
     
-    public Users getVeryfiedUser(String username, String password) throws AuthenticationException {
+    public Users getVeryfiedUser(int id, String password) throws AuthenticationException {
         EntityManager em = emf.createEntityManager();
         Users user;
         try {
-            user = em.find(Users.class, username);
+            user = em.find(Users.class, id);
             if (user == null || !user.verifyPassword(password)) {
                 throw new AuthenticationException("Invalid user name or password");
             }

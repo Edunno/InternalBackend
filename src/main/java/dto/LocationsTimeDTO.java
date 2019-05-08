@@ -1,13 +1,11 @@
 /* Esben; DECK-CS */
-
 package dto;
 
 import entity.LocationsTime;
 import java.util.Date;
 
 /**
- * @author Esben
- * All rights belong to respective contributors.
+ * @author Esben All rights belong to respective contributors.
  */
 public class LocationsTimeDTO {
 
@@ -19,8 +17,8 @@ public class LocationsTimeDTO {
     int longitude;
     int latitude;
     int carId;
-    
-    public LocationsTimeDTO(LocationsTime a){
+
+    public LocationsTimeDTO(LocationsTime a) {
         this.id = a.getId();
         this.name = a.getName();
         this.status = a.getStatus();
@@ -28,7 +26,9 @@ public class LocationsTimeDTO {
         this.endsAt = a.getEndsAt();
         this.longitude = a.getLocLongitude();
         this.latitude = a.getLocLatitude();
-        this.carId = a.getCarId().getId();
+//        if (!a.getCarId().equals(null)) {
+            this.carId = a.getCarId().getId();
+//        }
     }
 
     public int getId() {
@@ -94,7 +94,5 @@ public class LocationsTimeDTO {
     public void setCarId(int carId) {
         this.carId = carId;
     }
-    
-    
-    
+
 }

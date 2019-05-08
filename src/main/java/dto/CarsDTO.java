@@ -20,8 +20,8 @@ public class CarsDTO {
     int price;
     String comments;
     String createdAt;
-    ArrayList<Integer> rentalList;
-    ArrayList<Integer> locationTimeList;
+    ArrayList<RentalsDTO> rentalList;
+    ArrayList<LocationsTimeDTO> locationTimeList;
 
     public CarsDTO(Cars a) {
         this.id = a.getId();
@@ -33,23 +33,18 @@ public class CarsDTO {
         this.comments = a.getComments();
         this.createdAt = a.getCreatedAt();
         if (!a.getRentalsCollection().isEmpty()) {
-            for (Rentals aR : a.getRentalsCollection()) {
-                this.rentalList.add(new RentalsDTO(aR).getId());
+            for(Rentals aR : a.getRentalsCollection()){
+                this.rentalList.add(new RentalsDTO(aR));
             }
         }
         if (!a.getLocationsTimeCollection().isEmpty()) {
-            for (LocationsTime aT : a.getLocationsTimeCollection()) {
-                this.locationTimeList.add(new LocationsTimeDTO(aT).getId());
+            for(LocationsTime aT : a.getLocationsTimeCollection()){
+                this.locationTimeList.add(new LocationsTimeDTO(aT));
             }
         }
     }
-
-    public int getId() {
+    public int getId(){
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -108,23 +103,23 @@ public class CarsDTO {
         this.createdAt = createdAt;
     }
 
-    public ArrayList<Integer> getRentalList() {
+    public ArrayList<RentalsDTO> getRentalList() {
         return rentalList;
     }
 
-    public void setRentalList(ArrayList<Integer> rentalList) {
+    public void setRentalList(ArrayList<RentalsDTO> rentalList) {
         this.rentalList = rentalList;
     }
 
-    public ArrayList<Integer> getLocationTimeList() {
+    public ArrayList<LocationsTimeDTO> getLocationTimeList() {
         return locationTimeList;
     }
 
-    public void setLocationTimeList(ArrayList<Integer> locationTimeList) {
+    public void setLocationTimeList(ArrayList<LocationsTimeDTO> locationTimeList) {
         this.locationTimeList = locationTimeList;
     }
-
-    public void cleanLists() {
+    
+    public void cleanLists(){
         rentalList = null;
         locationTimeList = null;
         System.gc();

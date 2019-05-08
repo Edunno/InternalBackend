@@ -33,4 +33,8 @@ public class RentalsDTO {
         }
         this.userId = a.getUserId().getId();
     }
+
+    public Integer getId() {
+        return id;
+    }
 }

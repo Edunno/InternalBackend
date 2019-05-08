@@ -68,21 +68,18 @@ public class CarsResource {
         ArrayList<CarsDTO> resP = new ArrayList();
         for (Cars c : (Collection<Cars>) cF.getAllCars()) {
             CarsDTO nCar = new CarsDTO(c);
-            nCar.cleanLists();
+//            nCar.cleanLists();
             resP.add(nCar);
         }
-        System.out.println(resP.get(0).getBrand());
         return Response.ok().entity(gson.toJson(resP)).build();
     }
 
     @GET
-    @Path("/getbyperiod/{ystart}/{mstart}/{dstart}/{yend}/{mend}/{dend}")
+    @Path("/getbyperiod/{startDate}/{endDate}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByTime(@PathParam("ystart") int ystart, @PathParam("mstart") int mstart, @PathParam("dstart") int dstart, @PathParam("yend") int yend, @PathParam("mend") int mend, @PathParam("dend") int dend) {
+    public Response getByTime(@PathParam("startDate") int startDate, @PathParam("endDate") int endDate) {
         LocationsTimeFacade lF = new LocationsTimeFacade();
-        Date start = new Date(ystart-1900, mstart, dstart);
-        Date end = new Date(yend-1900, mend, dend);
-        Collection<LocationsTime> cLT = lF.getByDateAndStatus(start, end, "Available");
+        Collection<LocationsTime> cLT = lF.getByDateAndStatus(startDate, endDate, "Available");
         ArrayList<Cars> resp = new ArrayList();
         for (LocationsTime l : cLT) {
             resp.add(l.getCarId());

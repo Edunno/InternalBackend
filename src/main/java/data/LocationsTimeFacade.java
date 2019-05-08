@@ -1,7 +1,9 @@
 /* Esben; DECK-CS */
 package data;
 
+import dto.LocationsTimeDTO;
 import entity.LocationsTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -17,6 +19,17 @@ public class LocationsTimeFacade {
 
     EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
 
+    
+//    public static void main(String[] args) {
+//        LocationsTimeFacade lt = new LocationsTimeFacade();
+//        Collection<LocationsTime> aLT = lt.getByDateAndStatus(20180713, 20190112, "Available");
+//        ArrayList<LocationsTimeDTO> dto = new ArrayList();
+//        for(LocationsTime l : aLT){
+//            dto.add(new LocationsTimeDTO(l));
+//        }
+//        dto.get(0).getCarId();
+//        System.out.println();
+//    }
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -44,7 +57,7 @@ public class LocationsTimeFacade {
         return lTL;
     }
 
-    public Collection<LocationsTime> getByDateAndStatus(Date start, Date end, String status) {
+    public Collection<LocationsTime> getByDateAndStatus(int start, int end, String status) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("LocationsTime.findByTimeAndStatus");
         q.setParameter("startsAt", start);

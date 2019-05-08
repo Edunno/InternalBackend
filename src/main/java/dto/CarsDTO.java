@@ -43,6 +43,9 @@ public class CarsDTO {
             }
         }
     }
+    public int getId(){
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -119,6 +122,7 @@ public class CarsDTO {
     public void cleanLists(){
         rentalList = null;
         locationTimeList = null;
+        System.gc();
     }
 
 }

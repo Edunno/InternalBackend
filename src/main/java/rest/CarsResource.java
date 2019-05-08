@@ -80,9 +80,9 @@ public class CarsResource {
     public Response getByTime(@PathParam("startDate") int startDate, @PathParam("endDate") int endDate) {
         LocationsTimeFacade lF = new LocationsTimeFacade();
         Collection<LocationsTime> cLT = lF.getByDateAndStatus(startDate, endDate, "Available");
-        ArrayList<Cars> resp = new ArrayList();
+        ArrayList<CarsDTO> resp = new ArrayList();
         for (LocationsTime l : cLT) {
-            resp.add(l.getCarId());
+            resp.add(new CarsDTO(l.getCarId()));
         }
         return Response.ok().entity(gson.toJson(resp)).build();
     }

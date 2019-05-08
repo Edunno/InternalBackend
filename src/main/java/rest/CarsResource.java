@@ -80,8 +80,8 @@ public class CarsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByTime(@PathParam("ystart") int ystart, @PathParam("mstart") int mstart, @PathParam("dstart") int dstart, @PathParam("yend") int yend, @PathParam("mend") int mend, @PathParam("dend") int dend) {
         LocationsTimeFacade lF = new LocationsTimeFacade();
-        Date start = new Date(ystart, mstart, dstart);
-        Date end = new Date(yend, mend, dend);
+        Date start = new Date(ystart-1900, mstart, dstart);
+        Date end = new Date(yend-1900, mend, dend);
         Collection<LocationsTime> cLT = lF.getByDateAndStatus(start, end, "Available");
         ArrayList<Cars> resp = new ArrayList();
         for (LocationsTime l : cLT) {

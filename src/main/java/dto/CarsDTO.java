@@ -43,6 +43,11 @@ public class CarsDTO {
             }
         }
     }
+
+    public CarsDTO() {
+    }
+    
+    
     public int getId(){
         return id;
     }

@@ -29,6 +29,10 @@ public class LocationsTimeDTO {
         this.carId = a.getCarId().getId();
     }
 
+    public LocationsTimeDTO() {
+    }
+    
+
     public int getId() {
         return id;
     }

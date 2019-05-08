@@ -1,6 +1,7 @@
 /* Esben; DECK-CS */
 package data;
 
+import dto.LocationsTimeDTO;
 import entity.LocationsTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,11 +20,16 @@ public class LocationsTimeFacade {
     EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
 
     
-    public static void main(String[] args) {
-        LocationsTimeFacade lt = new LocationsTimeFacade();
-        Collection<LocationsTime> aLT = lt.getByDateAndStatus(20180713, 20190112, "Available");
-        System.out.println(aLT.iterator().next().getCarId().getBrand());
-    }
+//    public static void main(String[] args) {
+//        LocationsTimeFacade lt = new LocationsTimeFacade();
+//        Collection<LocationsTime> aLT = lt.getByDateAndStatus(20180713, 20190112, "Available");
+//        ArrayList<LocationsTimeDTO> dto = new ArrayList();
+//        for(LocationsTime l : aLT){
+//            dto.add(new LocationsTimeDTO(l));
+//        }
+//        dto.get(0).getCarId();
+//        System.out.println();
+//    }
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;
     }

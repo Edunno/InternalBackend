@@ -20,8 +20,8 @@ public class CarsDTO {
     int price;
     String comments;
     String createdAt;
-    ArrayList<RentalsDTO> rentalList;
-    ArrayList<LocationsTimeDTO> locationTimeList;
+    ArrayList<RentalsDTO> rentalList = new ArrayList();
+    ArrayList<LocationsTimeDTO> locationTimeList = new ArrayList();
 
     public CarsDTO(Cars a) {
         this.id = a.getId();

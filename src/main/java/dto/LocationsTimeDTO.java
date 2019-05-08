@@ -26,9 +26,7 @@ public class LocationsTimeDTO {
         this.endsAt = a.getEndsAt();
         this.longitude = a.getLocLongitude();
         this.latitude = a.getLocLatitude();
-//        if (!a.getCarId().equals(null)) {
-            this.carId = a.getCarId().getId();
-//        }
+        this.carId = a.getCarId().getId();
     }
 
     public int getId() {

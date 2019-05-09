@@ -26,21 +26,22 @@ public class TestUtils {
             em.createQuery("delete from Cars").executeUpdate();
 
             Cars c = new Cars();
-            c.setName("test");
+            c.setPriceClass("A");
             c.setBrand("Ford");
             c.setModel("Mondeo");
             c.setDistDriven(15000);
+            c.setYear("2000");
             c.setComments("Bule i højre dør");
-            c.setPrice(100);
             em.persist(c);
 
             Cars c2 = new Cars();
-            c2.setName("test2");
+            c2.setPriceClass("E");
             c2.setBrand("VW");
             c2.setModel("Golf");
             c2.setDistDriven(20000);
+            c2.setYear("2001");
             c2.setComments("Flænge i forrude");
-            c2.setPrice(200);
+            
             em.persist(c2);
             em.getTransaction().commit();
         } finally {

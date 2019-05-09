@@ -46,8 +46,8 @@ public class CarsFacadeTest {
     @Test
     public void getCarById() {
         Cars c = facade.getCarById(1);
-        assertTrue(!c.getName().isEmpty());
-        System.out.println("Car c= " + c.getName());
+        assertTrue(!c.getPriceClass().isEmpty());
+        System.out.println("Car c= " + c.getPriceClass());
 
     }
 
@@ -59,21 +59,6 @@ public class CarsFacadeTest {
     }
 
     @Test
-    public void getCarsByMinPrice() {
-        int price = 150;
-        Collection<Cars> c = facade.getByPriceMin(price);
-        assertTrue(c.equals(facade.getByPriceMin(price)));
-    }
-
-    @Test
-    public void getCarsByMaxPrice() {
-        int price = 150;
-        Collection<Cars> c = facade.getByPriceMax(price);
-        assertTrue(c.equals(facade.getByPriceMax(price)));
-        System.out.println(c);
-    }
-
-    @Test
     public void addCarTest() {
         Cars c = new Cars();
         c.setId(5);
@@ -81,8 +66,8 @@ public class CarsFacadeTest {
         c.setModel("Focus");
         c.setDistDriven(15000);
         c.setComments("Knækket sidespejl");
-        c.setPrice(75);
-        c.setName("addCarTest");
+        c.setYear("2000");
+        c.setPriceClass("A");
         Cars tc = facade.addCar(c);
         assertEquals(c.getId(), tc.getId());
 

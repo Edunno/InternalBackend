@@ -32,14 +32,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cars.findAll", query = "SELECT c FROM Cars c")
     , @NamedQuery(name = "Cars.findById", query = "SELECT c FROM Cars c WHERE c.id = :id")
-    , @NamedQuery(name = "Cars.findByName", query = "SELECT c FROM Cars c WHERE c.name = :name")
+    , @NamedQuery(name = "Cars.findByPriceClass", query = "SELECT c FROM Cars c WHERE c.priceClass = :priceClass")
     , @NamedQuery(name = "Cars.findByDistDrivenMAX", query = "SELECT c FROM Cars c WHERE c.distDriven < :distDriven")
     , @NamedQuery(name = "Cars.findByDistDrivenMIN", query = "SELECT c FROM Cars c WHERE c.distDriven > :distDriven")
-    , @NamedQuery(name = "Cars.findByBrand", query = "SELECT c FROM Cars c WHERE c.brand = :brand")
+    , @NamedQuery(name = "Cars.findByBrand", query = "SELECT c FROM Cars  WHERE c.brand = :brand")
     , @NamedQuery(name = "Cars.findByModel", query = "SELECT c FROM Cars c WHERE c.model = :model")
-    , @NamedQuery(name = "Cars.findByPriceMax", query = "SELECT c FROM Cars c WHERE c.price < :price")
-    , @NamedQuery(name = "Cars.findByPriceMin", query = "SELECT c FROM Cars c WHERE c.price > :price")
-    , @NamedQuery(name = "Cars.findByCreatedAt", query = "SELECT c FROM Cars c WHERE c.createdAt = :createdAt")})
+    , @NamedQuery(name = "Cars.findByYear", query = "SELECT c FROM Cars c WHERE c.year = :year")})
 public class Cars implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,8 +48,8 @@ public class Cars implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 255)
-    @Column(name = "name")
-    private String name;
+    @Column(name = "priceClass")
+    private String priceClass;
     @Column(name = "distDriven")
     private Integer distDriven;
     @Size(max = 255)
@@ -60,15 +58,13 @@ public class Cars implements Serializable {
     @Size(max = 255)
     @Column(name = "model")
     private String model;
-    @Column(name = "price")
-    private Integer price;
     @Lob
     @Size(max = 65535)
     @Column(name = "comments")
     private String comments;
     @Size(max = 255)
-    @Column(name = "created_at")
-    private String createdAt;
+    @Column(name = "year")
+    private String year;
     @ManyToMany(mappedBy = "carsCollection")
     private Collection<Rentals> rentalsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "carId")
@@ -89,12 +85,12 @@ public class Cars implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPriceClass() {
+        return priceClass;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPriceClass(String priceClass) {
+        this.priceClass = priceClass;
     }
 
     public Integer getDistDriven() {
@@ -121,14 +117,6 @@ public class Cars implements Serializable {
         this.model = model;
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
     public String getComments() {
         return comments;
     }
@@ -137,12 +125,12 @@ public class Cars implements Serializable {
         this.comments = comments;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getYear() {
+        return year;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setYear(String year) {
+        this.year = year;
     }
 
     @XmlTransient

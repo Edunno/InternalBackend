@@ -45,13 +45,6 @@ public class CarsFacade {
         return car;
     }
 
-    public List<Cars> getByName(String name) {
-        EntityManager em = emf.createEntityManager();
-        Query q = em.createNamedQuery("");
-        q.setParameter("name", name);
-        List<Cars> carList = q.getResultList();
-        return carList;
-    }
 
     public Collection<Cars> getByDistDrivenMax(int dist) {
         EntityManager em = emf.createEntityManager();
@@ -81,22 +74,6 @@ public class CarsFacade {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByModel");
         q.setParameter("model", model);
-        Collection<Cars> carList = q.getResultList();
-        return carList;
-    }
-
-    public Collection<Cars> getByPriceMax(int price) {
-        EntityManager em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Cars.findByPriceMax");
-        q.setParameter("price", price);
-        Collection<Cars> carList = q.getResultList();
-        return carList;
-    }
-
-    public Collection<Cars> getByPriceMin(int price) {
-        EntityManager em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Cars.findByPriceMin");
-        q.setParameter("price", price);
         Collection<Cars> carList = q.getResultList();
         return carList;
     }

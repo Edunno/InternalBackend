@@ -1,5 +1,6 @@
 package utility;
 
+import entity.Cars;
 import entity.Role;
 import entity.Users;
 import javax.persistence.EntityManager;
@@ -7,8 +8,31 @@ import javax.persistence.EntityManager;
 public class SetupTestUsers {
 
   public static void main(String[] args) {
+      SetupTestUsers su = new SetupTestUsers();
+      su.createCarForDB();
 
-    EntityManager em = PuSelector.getEntityManagerFactory("pu").createEntityManager();
+
+   
+  }
+  
+  void createCarForDB(){
+      EntityManager em = PuSelector.getEntityManagerFactory("pu").createEntityManager();
+      em.getTransaction().begin();
+      Cars car = new Cars();
+      car.setPriceClass("E");
+      car.setBrand("Mercedes");
+      car.setComments("Experience tranquility");
+      car.setDistDriven(10240);
+      car.setModel("E200");
+      car.setYear("2015");
+      em.persist(car);
+      em.getTransaction().commit();
+      
+      
+  }
+  
+  void createUsers(){
+          EntityManager em = PuSelector.getEntityManagerFactory("pu").createEntityManager();
        
     // IMPORTAAAAAAAAAANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // This breaks one of the MOST fundamental security rules in that it ships with default users and passwords
@@ -39,7 +63,6 @@ public class SetupTestUsers {
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));
     System.out.println("Testing user with wrong password: " + user.verifyPassword("test1"));
     System.out.println("Created TEST Users");
-   
   }
 
 }

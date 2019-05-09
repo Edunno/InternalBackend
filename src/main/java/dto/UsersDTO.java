@@ -25,6 +25,11 @@ public class UsersDTO {
     int latitude;
     Collection<Rentals> rentalsCollcetion;
     List<Role> role;
+
+    public UsersDTO() {
+    }
+    
+    
     
     public UsersDTO(Users a){
         this.id = a.getId();

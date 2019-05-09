@@ -13,25 +13,23 @@ import java.util.Collection;
 public class CarsDTO {
 
     int id;
-    String name;
+    String priceClass;
     int distDriven;
     String brand;
     String model;
-    int price;
     String comments;
-    String createdAt;
+    String year;
     ArrayList<RentalsDTO> rentalList = new ArrayList();
     ArrayList<LocationsTimeDTO> locationTimeList = new ArrayList();
 
     public CarsDTO(Cars a) {
         this.id = a.getId();
-        this.name = a.getName();
         this.distDriven = a.getDistDriven();
         this.brand = a.getBrand();
         this.model = a.getModel();
-        this.price = a.getPrice();
+        this.priceClass = a.getPriceClass();
         this.comments = a.getComments();
-        this.createdAt = a.getCreatedAt();
+        this.year = a.getYear();
         if (!a.getRentalsCollection().isEmpty()) {
             for(Rentals aR : a.getRentalsCollection()){
                 this.rentalList.add(new RentalsDTO(aR));
@@ -52,12 +50,12 @@ public class CarsDTO {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getPriceClass() {
+        return priceClass;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPriceClass(String priceClass) {
+        this.priceClass = priceClass;
     }
 
     public int getDistDriven() {
@@ -84,14 +82,6 @@ public class CarsDTO {
         this.model = model;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public String getComments() {
         return comments;
     }
@@ -100,12 +90,12 @@ public class CarsDTO {
         this.comments = comments;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getYear() {
+        return year;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public ArrayList<RentalsDTO> getRentalList() {

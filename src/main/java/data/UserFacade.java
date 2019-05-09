@@ -5,30 +5,37 @@
  */
 package data;
 
+import dto.UsersDTO;
 import entity.Users;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import exceptions.AuthenticationException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.Query;
+import utility.PuSelector;
 
 /**
  *
  * @author caspe
  */
 public class UserFacade {
-  
-    private static EntityManagerFactory emf;
+
+    private static EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
     private static UserFacade instance;
-    
-    private UserFacade(){}
-    
-    public static UserFacade getInstance(EntityManagerFactory factory){
-        if(instance == null){
-          emf = factory;
-          instance = new UserFacade();
+
+    public UserFacade() {
+    }
+
+    public static UserFacade getInstance(EntityManagerFactory factory) {
+        if (instance == null) {
+            emf = factory;
+            instance = new UserFacade();
         }
         return instance;
     }
-    
+
     public Users getVeryfiedUser(int id, String password) throws AuthenticationException {
         EntityManager em = emf.createEntityManager();
         Users user;
@@ -41,6 +48,13 @@ public class UserFacade {
             em.close();
         }
         return user;
+    }
+  
+    public List<Users> getAllUsers() {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Users.findAll");
+        List<Users> userList = q.getResultList();
+        return userList;
     }
 
 }

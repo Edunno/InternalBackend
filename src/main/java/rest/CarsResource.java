@@ -22,6 +22,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -30,7 +31,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Esben
  */
-@Path("Cars")
+@Path("cars")
 public class CarsResource {
 
     @Context
@@ -62,7 +63,6 @@ public class CarsResource {
     }
 
     @GET
-    @Path("getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCars() {
         ArrayList<CarsDTO> resP = new ArrayList();
@@ -75,9 +75,9 @@ public class CarsResource {
     }
 
     @GET
-    @Path("/getbyperiod/{startDate}/{endDate}")
+    @Path("/period/{startDate}/{endDate}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByTime(@PathParam("startDate") int startDate, @PathParam("endDate") int endDate) {
+    public Response getByPeriod(@PathParam("startDate") int startDate, @PathParam("endDate") int endDate) {
         LocationsTimeFacade lF = new LocationsTimeFacade();
         Collection<LocationsTime> cLT = lF.getByDateAndStatus(startDate, endDate, "Available");
         ArrayList<CarsDTO> resp = new ArrayList();
@@ -85,6 +85,47 @@ public class CarsResource {
             resp.add(new CarsDTO(l.getCarId()));
         }
         return Response.ok().entity(gson.toJson(resp)).build();
+    }
+
+    @GET
+    @Path("/pricemax/{maxPrice}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByPrice(@PathParam("maxPrice") int maxPrice) {
+        ArrayList<CarsDTO> resp = new ArrayList();
+        for (Cars l : (Collection<Cars>) cF.getByPriceMax(maxPrice)) {
+            resp.add(new CarsDTO(l));
+        }
+        return Response.ok().entity(gson.toJson(resp)).build();
+    }
+
+    @GET
+    @Path("/query")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response makeQuery(
+            @QueryParam("brand") String brand,
+            @QueryParam("model") String model,
+            @QueryParam("prmax") int prmax,
+            @QueryParam("prmin") int prmin,
+            @QueryParam("dstart") Integer dstart,
+            @QueryParam("dend") Integer dend,
+            @QueryParam("distmax") int distmax,
+            @QueryParam("distmin") int distmin) {
+        String resp = "SELECT c FROM Cars c";
+        boolean flag = true;
+        if (!brand.isEmpty()) {
+            flag = false;
+            resp += " WHERE c.brand = " + brand;
+        }
+        if (!model.isEmpty() && flag) {
+            resp += " WHERE c.model = " + model;
+            flag = false;
+        } else if (!model.isEmpty()) {
+            resp += " AND c.model = " + model;
+        }
+        if (!((dstart == null) && (dend == null)) && flag) {
+            resp += " WHERE c.LocationsTime.";
+        }
+        return null;
     }
 
     /**

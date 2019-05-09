@@ -132,6 +132,7 @@ public class Users implements Serializable {
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
     }
 
+    @XmlTransient
     public List<Role> getRoleList() {
         return roleList;
     }

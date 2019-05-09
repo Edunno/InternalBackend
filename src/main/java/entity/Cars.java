@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cars.findByDistDrivenMIN", query = "SELECT c FROM Cars c WHERE c.distDriven > :distDriven")
     , @NamedQuery(name = "Cars.findByBrand", query = "SELECT c FROM Cars c WHERE c.brand = :brand")
     , @NamedQuery(name = "Cars.findByModel", query = "SELECT c FROM Cars c WHERE c.model = :model")
-    , @NamedQuery(name = "Cars.findByYear", query = "SELECT c FROM Cars c WHERE c.year = :year")})
+    , @NamedQuery(name = "Cars.findByYear", query = "SELECT c FROM Cars c WHERE c.pyear = :pyear")})
 public class Cars implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,8 +63,8 @@ public class Cars implements Serializable {
     @Column(name = "comments")
     private String comments;
     @Size(max = 255)
-    @Column(name = "year")
-    private String year;
+    @Column(name = "pyear")
+    private String pyear;
     @ManyToMany(mappedBy = "carsCollection")
     private Collection<Rentals> rentalsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "carId")
@@ -126,11 +126,11 @@ public class Cars implements Serializable {
     }
 
     public String getYear() {
-        return year;
+        return pyear;
     }
 
     public void setYear(String year) {
-        this.year = year;
+        this.pyear = year;
     }
 
     @XmlTransient

@@ -18,7 +18,7 @@ public class CarsDTO {
     String brand;
     String model;
     String comments;
-    String year;
+    String pyear;
     ArrayList<RentalsDTO> rentalList = new ArrayList();
     ArrayList<LocationsTimeDTO> locationTimeList = new ArrayList();
 
@@ -29,7 +29,7 @@ public class CarsDTO {
         this.model = a.getModel();
         this.priceClass = a.getPriceClass();
         this.comments = a.getComments();
-        this.year = a.getYear();
+        this.pyear = a.getYear();
         if (!a.getRentalsCollection().isEmpty()) {
             for(Rentals aR : a.getRentalsCollection()){
                 this.rentalList.add(new RentalsDTO(aR));
@@ -91,11 +91,11 @@ public class CarsDTO {
     }
 
     public String getYear() {
-        return year;
+        return pyear;
     }
 
     public void setYear(String year) {
-        this.year = year;
+        this.pyear = year;
     }
 
     public ArrayList<RentalsDTO> getRentalList() {

@@ -97,7 +97,6 @@ public class CarsResource {
 //        }
 //        return Response.ok().entity(gson.toJson(resp)).build();
 //    }
-
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)
@@ -110,21 +109,7 @@ public class CarsResource {
             @QueryParam("dend") Integer dend,
             @QueryParam("distmax") int distmax,
             @QueryParam("distmin") int distmin) {
-        String resp = "SELECT c FROM Cars c";
-        boolean flag = true;
-        if (!brand.isEmpty()) {
-            flag = false;
-            resp += " WHERE c.brand = " + brand;
-        }
-        if (!model.isEmpty() && flag) {
-            resp += " WHERE c.model = " + model;
-            flag = false;
-        } else if (!model.isEmpty()) {
-            resp += " AND c.model = " + model;
-        }
-        if (!((dstart == null) && (dend == null)) && flag) {
-            resp += " WHERE c.LocationsTime.";
-        }
+        cF.getMultiSearch(brand, model, prmax, prmin, dstart, dend, distmax, distmin);
         return null;
     }
 

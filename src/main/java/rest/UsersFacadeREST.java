@@ -68,7 +68,6 @@ public class UsersFacadeREST {
         for (Users u : (List<Users>) uf.getAllUsers()) {
             UsersDTO nUser = new UsersDTO(u);
             uList.add(nUser);
-            System.out.println(uList);  
         }
         return Response.ok().entity(gson.toJson(uList)).build();
     }

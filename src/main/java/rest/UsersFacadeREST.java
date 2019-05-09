@@ -65,7 +65,7 @@ public class UsersFacadeREST {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
         ArrayList<UsersDTO> uList = new ArrayList();
-        for (Users u : (List<Users>) uf.getAllUsers()) {
+        for (Users u : (Collection<Users>) uf.getAllUsers()) {
             UsersDTO nUser = new UsersDTO(u);
             uList.add(nUser);
         }

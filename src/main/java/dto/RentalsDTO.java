@@ -20,6 +20,11 @@ public class RentalsDTO {
     Date endsAt;
     ArrayList<CarsDTO> carsCollection;
     int userId;
+
+    public RentalsDTO() {
+    }
+    
+    
     
     public RentalsDTO(Rentals a){
         this.id = a.getId();
@@ -37,4 +42,46 @@ public class RentalsDTO {
     public Integer getId() {
         return id;
     }
+
+    public ArrayList<CarsDTO> getCarsCollection() {
+        return carsCollection;
+    }
+
+    public void setCarsCollection(ArrayList<CarsDTO> carsCollection) {
+        this.carsCollection = carsCollection;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getStartsAt() {
+        return startsAt;
+    }
+
+    public void setStartsAt(Date startsAt) {
+        this.startsAt = startsAt;
+    }
+
+    public Date getEndsAt() {
+        return endsAt;
+    }
+
+    public void setEndsAt(Date endsAt) {
+        this.endsAt = endsAt;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    
+    
 }

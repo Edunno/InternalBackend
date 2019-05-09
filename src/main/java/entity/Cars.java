@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cars.findByPriceClass", query = "SELECT c FROM Cars c WHERE c.priceClass = :priceClass")
     , @NamedQuery(name = "Cars.findByDistDrivenMAX", query = "SELECT c FROM Cars c WHERE c.distDriven < :distDriven")
     , @NamedQuery(name = "Cars.findByDistDrivenMIN", query = "SELECT c FROM Cars c WHERE c.distDriven > :distDriven")
-    , @NamedQuery(name = "Cars.findByBrand", query = "SELECT c FROM Cars  WHERE c.brand = :brand")
+    , @NamedQuery(name = "Cars.findByBrand", query = "SELECT c FROM Cars c WHERE c.brand = :brand")
     , @NamedQuery(name = "Cars.findByModel", query = "SELECT c FROM Cars c WHERE c.model = :model")
     , @NamedQuery(name = "Cars.findByYear", query = "SELECT c FROM Cars c WHERE c.year = :year")})
 public class Cars implements Serializable {

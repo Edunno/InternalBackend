@@ -87,16 +87,16 @@ public class CarsResource {
         return Response.ok().entity(gson.toJson(resp)).build();
     }
 
-    @GET
-    @Path("/pricemax/{maxPrice}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getByPrice(@PathParam("maxPrice") int maxPrice) {
-        ArrayList<CarsDTO> resp = new ArrayList();
-        for (Cars l : (Collection<Cars>) cF.getByPriceMax(maxPrice)) {
-            resp.add(new CarsDTO(l));
-        }
-        return Response.ok().entity(gson.toJson(resp)).build();
-    }
+//    @GET
+//    @Path("/pricemax/{maxPrice}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getByPrice(@PathParam("maxPrice") int maxPrice) {
+//        ArrayList<CarsDTO> resp = new ArrayList();
+//        for (Cars l : (Collection<Cars>) cF.getByPriceMax(maxPrice)) {
+//            resp.add(new CarsDTO(l));
+//        }
+//        return Response.ok().entity(gson.toJson(resp)).build();
+//    }
 
     @GET
     @Path("/query")

@@ -23,7 +23,7 @@ public class TestUtils {
             //System.out.println("XXXXXXXXXXXXXXXX  Creating Test users for TESTING XXXXXXXXXXXXXXXXXXXXXX");
             em.getTransaction().begin();
             //Delete existing users and roles to get a "fresh" database
-            em.createQuery("delete from Cars").executeUpdate();
+//            em.createQuery("delete from Cars").executeUpdate();
 
             Cars c = new Cars();
             c.setPriceClass("A");
@@ -41,7 +41,7 @@ public class TestUtils {
             c2.setDistDriven(20000);
             c2.setYear("2001");
             c2.setComments("Flænge i forrude");
-            
+
             em.persist(c2);
             em.getTransaction().commit();
         } finally {
@@ -49,38 +49,38 @@ public class TestUtils {
         }
 
     }
-    
-      public static void setupTestUsers(EntityManagerFactory emf) {
-    EntityManager em = emf.createEntityManager();
-    try {
-      //System.out.println("XXXXXXXXXXXXXXXX  Creating Test users for TESTING XXXXXXXXXXXXXXXXXXXXXX");
-      em.getTransaction().begin();
-      //Delete existing users and roles to get a "fresh" database
-      em.createQuery("delete from Users").executeUpdate();
-      em.createQuery("delete from Role").executeUpdate();
-     
-      Role userRole = new Role("user");
-      Role adminRole = new Role("admin");
-      Users user = new Users("user", "test");
-      user.setId(1);
-      user.addRole(userRole);
-      Users admin = new Users("admin", "test");
-      admin.setId(2);
-      admin.addRole(adminRole);
-      Users both = new Users("user_admin", "test");
-      both.setId(3);
-      both.addRole(userRole);
-      both.addRole(adminRole);
-      em.persist(userRole);
-      em.persist(adminRole);
-      em.persist(user);
-      em.persist(admin);
-      em.persist(both);
-      System.out.println("Saved test data to database");
-      em.getTransaction().commit();
-    } finally {
-      em.close();
+
+    public static void setupTestUsers(EntityManagerFactory emf) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            //System.out.println("XXXXXXXXXXXXXXXX  Creating Test users for TESTING XXXXXXXXXXXXXXXXXXXXXX");
+            em.getTransaction().begin();
+            //Delete existing users and roles to get a "fresh" database
+            em.createQuery("delete from Users").executeUpdate();
+            em.createQuery("delete from Role").executeUpdate();
+
+            Role userRole = new Role("user");
+            Role adminRole = new Role("admin");
+            Users user = new Users("user", "test");
+            user.setId(1);
+            user.addRole(userRole);
+            Users admin = new Users("admin", "test");
+            admin.setId(2);
+            admin.addRole(adminRole);
+            Users both = new Users("user_admin", "test");
+            both.setId(3);
+            both.addRole(userRole);
+            both.addRole(adminRole);
+            em.persist(userRole);
+            em.persist(adminRole);
+            em.persist(user);
+            em.persist(admin);
+            em.persist(both);
+            System.out.println("Saved test data to database");
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
-  }
 
 }

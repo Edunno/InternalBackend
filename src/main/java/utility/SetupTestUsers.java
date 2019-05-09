@@ -10,6 +10,7 @@ public class SetupTestUsers {
   public static void main(String[] args) {
       SetupTestUsers su = new SetupTestUsers();
       su.createCarForDB();
+      su.createUsers();
 
 
    

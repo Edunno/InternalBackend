@@ -82,19 +82,22 @@ public class CarsFacade {
            String resp = "SELECT c FROM Cars c";
         boolean flag = true;
         if (!((dstart == null) && (dend == null)) && flag) {
-            resp += " NATURAL JOIN LocationsTime WHERE c.LocationsTime.starts_at > :dstart AND c.LocationsTime.ends_at < :dend";
+            resp += " NATURAL JOIN LocationsTime b WHERE c.b.starts_at >= :dstart AND c.b.ends_at <= :dend AND c.b.status = Available";
             flag = false;
         }
         if (!brand.isEmpty() && flag) {
             flag = false;
-            resp += " WHERE c.brand = " + brand;
+            resp += " WHERE c.brand = :brand";
+        }else if(!brand.isEmpty()){
+            resp += " AND c.brand = :brand";
         }
         if (!model.isEmpty() && flag) {
-            resp += " WHERE c.model = " + model;
+            resp += " WHERE c.model = :model";
             flag = false;
         } else if (!model.isEmpty()) {
-            resp += " AND c.model = " + model;
+            resp += " AND c.model = :model";
         }
+        return null;
         
     }
 

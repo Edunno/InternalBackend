@@ -45,7 +45,6 @@ public class CarsFacade {
         return car;
     }
 
-
     public Collection<Cars> getByDistDrivenMax(int dist) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByDistDrivenMAX");
@@ -76,6 +75,30 @@ public class CarsFacade {
         q.setParameter("model", model);
         Collection<Cars> carList = q.getResultList();
         return carList;
+    }
+
+    public Collection<Cars> getMultiSearch(String brand, String model, int prmax, int prmin, Integer dstart, Integer dend, int distmax, int distmin) {
+        EntityManager em = emf.createEntityManager();
+           String resp = "SELECT c FROM Cars c";
+        boolean flag = true;
+        if (!((dstart == null) && (dend == null)) && flag) {
+            resp += " NATURAL JOIN LocationsTime b WHERE c.b.starts_at >= :dstart AND c.b.ends_at <= :dend AND c.b.status = Available";
+            flag = false;
+        }
+        if (!brand.isEmpty() && flag) {
+            flag = false;
+            resp += " WHERE c.brand = :brand";
+        }else if(!brand.isEmpty()){
+            resp += " AND c.brand = :brand";
+        }
+        if (!model.isEmpty() && flag) {
+            resp += " WHERE c.model = :model";
+            flag = false;
+        } else if (!model.isEmpty()) {
+            resp += " AND c.model = :model";
+        }
+        return null;
+        
     }
 
     /*

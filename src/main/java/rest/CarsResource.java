@@ -52,6 +52,15 @@ public class CarsResource {
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById(@PathParam("id") int id) {
+        Cars c = cF.getCarById(id);
+
+        return Response.ok().entity(gson.toJson(c)).build();
+    }
+
+    @GET
     @Path("/brand/{brand}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByBrand(@PathParam("brand") String brand) {
@@ -97,7 +106,6 @@ public class CarsResource {
 //        }
 //        return Response.ok().entity(gson.toJson(resp)).build();
 //    }
-
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)

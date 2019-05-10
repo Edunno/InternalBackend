@@ -27,6 +27,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 /**
  * REST Web Service
@@ -38,6 +39,9 @@ public class CarsResource {
 
     @Context
     private UriInfo context;
+
+    @Context
+    SecurityContext securityContext;
     Gson gson = new Gson();
     CarsFacade cF = new CarsFacade();
 

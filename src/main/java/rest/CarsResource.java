@@ -18,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -72,18 +73,18 @@ public class CarsResource {
 
         return Response.ok().entity(gson.toJson(c)).build();
     }
-    
+
     @GET
     @Path("/class/{priceClass}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByClass(@PathParam("priceClass") String priceClass){
+    public Response getByClass(@PathParam("priceClass") String priceClass) {
         ArrayList<CarsDTO> cList = new ArrayList();
-        for (Cars c : (Collection<Cars>) cF.getByPriceClass(priceClass)){
+        for (Cars c : (Collection<Cars>) cF.getByPriceClass(priceClass)) {
             cList.add(new CarsDTO(c));
         }
         return Response.ok().entity(gson.toJson(cList)).build();
     }
-    
+
     @GET
     @Path("/brand/{brand}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -123,6 +124,14 @@ public class CarsResource {
     public void postPerson(String content) {
         Cars c = gson.fromJson(content, Cars.class);
         cF.addCar(c);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteCarByID(@PathParam("id") int id) {
+        Cars c = cF.deleteCarByID(id);
+        return Response.ok().entity(gson.toJson(c)).build();
     }
 
     @GET

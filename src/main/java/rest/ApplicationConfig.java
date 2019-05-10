@@ -28,10 +28,13 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(cors.CorsRequestFilter.class);
         resources.add(cors.CorsResponseFilter.class);
+        resources.add(exceptions.GenericExceptionMapper.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(rest.CarsResource.class);
         resources.add(rest.RoleFacadeREST.class);
         resources.add(rest.UsersFacadeREST.class);
+        resources.add(security.JWTAuthenticationFilter.class);
+        resources.add(security.LoginEndpoint.class);
     }
 
 }

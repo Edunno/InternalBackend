@@ -62,13 +62,10 @@ public class TestUtils {
             Role userRole = new Role("user");
             Role adminRole = new Role("admin");
             Users user = new Users("user", "test");
-            user.setId(1);
             user.addRole(userRole);
             Users admin = new Users("admin", "test");
-            admin.setId(2);
             admin.addRole(adminRole);
             Users both = new Users("user_admin", "test");
-            both.setId(3);
             both.addRole(userRole);
             both.addRole(adminRole);
             em.persist(userRole);

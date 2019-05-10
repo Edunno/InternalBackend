@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class UsersDTO {
     
-    int id;
     String userName;
     String fullName;
     String email;
@@ -32,7 +31,6 @@ public class UsersDTO {
     
     
     public UsersDTO(Users a){
-        this.id = a.getId();
         this.userName = a.getUserName();
         this.fullName = a.getFullName();
         this.email = a.getEmail();
@@ -44,13 +42,7 @@ public class UsersDTO {
         this.rentalsCollcetion = a.getRentalsCollection();
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;

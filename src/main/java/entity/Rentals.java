@@ -58,9 +58,9 @@ public class Rentals implements Serializable {
         @JoinColumn(name = "product_id", referencedColumnName = "id")})
     @ManyToMany
     private Collection<Cars> carsCollection;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_name", referencedColumnName = "user_name")
     @ManyToOne(optional = false)
-    private Users userId;
+    private Users userName;
 
     public Rentals() {
     }
@@ -110,12 +110,12 @@ public class Rentals implements Serializable {
         this.carsCollection = carsCollection;
     }
 
-    public Users getUserId() {
-        return userId;
+    public Users getUserName() {
+        return userName;
     }
 
-    public void setUserId(Users userId) {
-        this.userId = userId;
+    public void setUserName(Users userName) {
+        this.userName = userName;
     }
 
     @Override

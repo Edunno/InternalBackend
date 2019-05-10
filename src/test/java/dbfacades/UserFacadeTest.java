@@ -38,7 +38,6 @@ public class UserFacadeTest {
 //  @Test
 //   public void getUserValid() throws AuthenticationException {
 //     Users u = facade.getVeryfiedUser("test", "test");
-//     u.getId();
 //     assertEquals("user", u.getUserName());
 //   }
 // 

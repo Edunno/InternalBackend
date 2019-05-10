@@ -19,7 +19,7 @@ public class RentalsDTO {
     Date startsAt;
     Date endsAt;
     ArrayList<CarsDTO> carsCollection;
-    int userId;
+    String userName;
 
     public RentalsDTO() {
     }
@@ -36,7 +36,7 @@ public class RentalsDTO {
                 this.carsCollection.add(new CarsDTO(aC));
             }
         }
-        this.userId = a.getUserId().getId();
+        this.userName = a.getUserName().getUserName();
     }
 
     public Integer getId() {
@@ -75,12 +75,12 @@ public class RentalsDTO {
         this.endsAt = endsAt;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(String userName) {
+        this.userName = userName;
     }
     
     

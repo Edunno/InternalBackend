@@ -9,28 +9,28 @@ public class SetupTestUsers {
 
   public static void main(String[] args) {
       SetupTestUsers su = new SetupTestUsers();
-      su.createCarForDB();
+     // su.createCarForDB();
       su.createUsers();
 
 
    
   }
   
-  void createCarForDB(){
-      EntityManager em = PuSelector.getEntityManagerFactory("pu").createEntityManager();
-      em.getTransaction().begin();
-      Cars car = new Cars();
-      car.setPriceClass("E");
-      car.setBrand("Mercedes");
-      car.setComments("Experience tranquility");
-      car.setDistDriven(10240);
-      car.setModel("E200");
-      car.setYear("2015");
-      em.persist(car);
-      em.getTransaction().commit();
-      
-      
-  }
+//  void createCarForDB(){
+//      EntityManager em = PuSelector.getEntityManagerFactory("pu").createEntityManager();
+//      em.getTransaction().begin();
+//      Cars car = new Cars();
+//      car.setPriceClass("E");
+//      car.setBrand("Mercedes");
+//      car.setComments("Experience tranquility");
+//      car.setDistDriven(10240);
+//      car.setModel("E200");
+//      car.setYear("2015");
+//      em.persist(car);
+//      em.getTransaction().commit();
+//      
+//      
+//  }
   
   void createUsers(){
           EntityManager em = PuSelector.getEntityManagerFactory("pu").createEntityManager();
@@ -45,13 +45,10 @@ public class SetupTestUsers {
     Role userRole = new Role("user");
     Role adminRole = new Role("admin");
     Users user = new Users("user", "test");
-    user.setId(1);
     user.addRole(userRole);
     Users admin = new Users("admin", "test");
-    admin.setId(2);
     admin.addRole(adminRole);
     Users both = new Users("user_admin", "test");
-    both.setId(3);
     both.addRole(userRole);
     both.addRole(adminRole);
     em.persist(userRole);

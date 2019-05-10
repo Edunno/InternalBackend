@@ -31,7 +31,6 @@ import org.mindrot.jbcrypt.BCrypt;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id")
     , @NamedQuery(name = "Users.findByUserName", query = "SELECT u from Users u WHERE u.userName = :userName")
     , @NamedQuery(name = "Users.findByFullName", query = "SELECT u FROM Users u WHERE u.fullName = :fullName")
     , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
@@ -43,12 +42,8 @@ import org.mindrot.jbcrypt.BCrypt;
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
-    @Size(max = 255)
+     @Size(max = 255)
     @Column(name = "full_name")
     private String fullName;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -70,6 +65,8 @@ public class Users implements Serializable {
     private Integer usrLatitude;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Rentals> rentalsCollection;
+    @Id
+    @NotNull
     @Column(name = "user_name", length = 25)
     private String userName;
     @Column(name = "user_pass")
@@ -94,17 +91,6 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public boolean verifyPassword(String pw) {
         return (BCrypt.checkpw(pw, userPass));
@@ -213,7 +199,7 @@ public class Users implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (userName != null ? userName.hashCode() : 0);
         return hash;
     }
 
@@ -224,7 +210,7 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.userName == null && other.userName != null) || (this.userName != null && !this.userName.equals(other.userName))) {
             return false;
         }
         return true;
@@ -232,7 +218,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Users[ id=" + id + " ]";
+        return "entity.Users[ id=" + userName + " ]";
     }
 
 }

@@ -19,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -106,6 +107,14 @@ public class CarsResource {
 //        }
 //        return Response.ok().entity(gson.toJson(resp)).build();
 //    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void postPerson(String content) {
+        Cars c = gson.fromJson(content, Cars.class);
+        cF.addCar(c);
+    }
+    
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)

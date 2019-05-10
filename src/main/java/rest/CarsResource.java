@@ -53,26 +53,6 @@ public class CarsResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getById(@PathParam("id") int id) {
-        Cars c = cF.getCarById(id);
-
-        return Response.ok().entity(gson.toJson(c)).build();
-    }
-
-    @GET
-    @Path("/brand/{brand}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getByBrand(@PathParam("brand") String brand) {
-        ArrayList<CarsDTO> resP = new ArrayList();
-        for (Cars c : (Collection<Cars>) cF.getByBrand(brand)) {
-            resP.add(new CarsDTO(c));
-        }
-        return Response.ok().entity(gson.toJson(resP)).build();
-    }
-
-    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCars() {
         ArrayList<CarsDTO> resP = new ArrayList();
@@ -80,6 +60,37 @@ public class CarsResource {
             CarsDTO nCar = new CarsDTO(c);
 //            nCar.cleanLists();
             resP.add(nCar);
+        }
+        return Response.ok().entity(gson.toJson(resP)).build();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById(@PathParam("id") int id) {
+        Cars c = cF.getCarById(id);
+
+        return Response.ok().entity(gson.toJson(c)).build();
+    }
+    
+    @GET
+    @Path("/class/{priceClass}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByClass(@PathParam("priceClass") String priceClass){
+        ArrayList<CarsDTO> cList = new ArrayList();
+        for (Cars c : (Collection<Cars>) cF.getByPriceClass(priceClass)){
+            cList.add(new CarsDTO(c));
+        }
+        return Response.ok().entity(gson.toJson(cList)).build();
+    }
+    
+    @GET
+    @Path("/brand/{brand}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByBrand(@PathParam("brand") String brand) {
+        ArrayList<CarsDTO> resP = new ArrayList();
+        for (Cars c : (Collection<Cars>) cF.getByBrand(brand)) {
+            resP.add(new CarsDTO(c));
         }
         return Response.ok().entity(gson.toJson(resP)).build();
     }
@@ -107,14 +118,13 @@ public class CarsResource {
 //        }
 //        return Response.ok().entity(gson.toJson(resp)).build();
 //    }
-    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void postPerson(String content) {
         Cars c = gson.fromJson(content, Cars.class);
         cF.addCar(c);
     }
-    
+
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)

@@ -49,7 +49,7 @@ public class UserFacade {
         }
         return user;
     }
-  
+
     public List<Users> getAllUsers() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Users.findAll");
@@ -57,4 +57,21 @@ public class UserFacade {
         return userList;
     }
 
+    public Users getUserById(int id) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Users.findById");
+        q.setParameter("id", id);
+        Users u = (Users) q.getResultList().get(0);
+        return u;
+    }
+
+//    public Users getUserById(int id) {
+//        EntityManager em = emf.createEntityManager();
+//        try {
+//            Users u = em.find(Users.class, (Integer) id);
+//            return u;
+//        } finally {
+//            em.close();
+//        }
+//    }
 }

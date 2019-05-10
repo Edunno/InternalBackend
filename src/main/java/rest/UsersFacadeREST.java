@@ -72,6 +72,17 @@ public class UsersFacadeREST {
         return Response.ok().entity(gson.toJson(uList)).build();
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById(@PathParam("id") int id) {
+
+        Users u = uf.getUserById(id);
+        UsersDTO udto = new UsersDTO(u);
+        
+        return Response.ok().entity(gson.toJson(udto)).build();
+    }
+
     /**
      * PUT method for updating or creating an instance of CarsResource
      *

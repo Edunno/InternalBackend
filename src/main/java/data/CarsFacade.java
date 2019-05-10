@@ -53,6 +53,14 @@ public class CarsFacade {
         return carList;
     }
 
+    public Collection<Cars> getByPriceClass(String priceClass) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Cars.findByPriceClass");
+        q.setParameter("priceClass", priceClass);
+        Collection<Cars> carList = q.getResultList();
+        return carList;
+    }
+
     public Collection<Cars> getByDistDrivenMin(int dist) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Cars.findByDistDrivenMIN");
@@ -79,7 +87,7 @@ public class CarsFacade {
 
     public Collection<Cars> getMultiSearch(String brand, String model, int prmax, int prmin, Integer dstart, Integer dend, int distmax, int distmin) {
         EntityManager em = emf.createEntityManager();
-           String resp = "SELECT c FROM Cars c";
+        String resp = "SELECT c FROM Cars c";
         boolean flag = true;
         if (!((dstart == null) && (dend == null)) && flag) {
             resp += " NATURAL JOIN LocationsTime b WHERE c.b.starts_at >= :dstart AND c.b.ends_at <= :dend AND c.b.status = Available";
@@ -88,7 +96,7 @@ public class CarsFacade {
         if (!brand.isEmpty() && flag) {
             flag = false;
             resp += " WHERE c.brand = :brand";
-        }else if(!brand.isEmpty()){
+        } else if (!brand.isEmpty()) {
             resp += " AND c.brand = :brand";
         }
         if (!model.isEmpty() && flag) {
@@ -98,7 +106,7 @@ public class CarsFacade {
             resp += " AND c.model = :model";
         }
         return null;
-        
+
     }
 
     /*

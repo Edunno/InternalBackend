@@ -63,7 +63,7 @@ public class Users implements Serializable {
     private Integer usrLongitude;
     @Column(name = "usr_latitude")
     private Integer usrLatitude;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userName")
     private Collection<Rentals> rentalsCollection;
     @Id
     @NotNull

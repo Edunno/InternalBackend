@@ -14,8 +14,8 @@ public class LocationsTimeDTO {
     String status;
     int startsAt;
     int endsAt;
-    int longitude;
-    int latitude;
+    double longitude;
+    double latitude;
     int carId;
 
     public LocationsTimeDTO(LocationsTime a) {
@@ -73,15 +73,15 @@ public class LocationsTimeDTO {
         this.endsAt = endsAt;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 

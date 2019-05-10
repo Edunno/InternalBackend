@@ -19,17 +19,33 @@ public class LocationsTimeFacade {
 
     EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
 
-    
     public static void main(String[] args) {
-        LocationsTimeFacade lt = new LocationsTimeFacade();
-        Collection<LocationsTime> aLT = lt.getByDateAndStatus(20180713, 20190112, "Available");
-        ArrayList<LocationsTimeDTO> dto = new ArrayList();
-        for(LocationsTime l : aLT){
-            dto.add(new LocationsTimeDTO(l));
-        }
-        
-        System.out.println(dto.get(0).getCarId());
+//        LocationsTimeFacade lt = new LocationsTimeFacade();
+//        Collection<LocationsTime> aLT = lt.getByDateAndStatus(20180713, 20190112, "Available");
+//        ArrayList<LocationsTimeDTO> dto = new ArrayList();
+//        for(LocationsTime l : aLT){
+//            dto.add(new LocationsTimeDTO(l));
+//        }
+//        
+//        System.out.println(dto.get(0).getCarId());
+        LocationsTimeFacade ltf = new LocationsTimeFacade();
+        ltf.addLocTimeTest();
+
     }
+
+    void addLocTimeTest() {
+        LocationsTime lt = new LocationsTime();
+        CarsFacade cf = new CarsFacade();
+        
+        lt.setCarId(cf.getCarById(1));
+        lt.setStartsAt(20190505);
+        lt.setEndsAt(20190506);
+        lt.setStatus("Occupied");
+        lt.setLocLatitude(55.630171);
+        lt.setLocLongitude(12.654341);
+        addLocationsTime(lt);
+    }
+
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -71,39 +87,38 @@ public class LocationsTimeFacade {
         EntityManager em = emf.createEntityManager();
         int approx = 1;
         Query q = em.createQuery("SELECT l FROM LocationsTime l WHERE l.locLatitude > :minLat AND l.locLatitude < :maxLat and l.locLongitude > minLon AND l.locLongitude < maxLon");
-        q.setParameter("minLat", lattitude-approx);
-        q.setParameter("maxLat", lattitude+approx);
-        q.setParameter("minLon", longitude-approx);
-        q.setParameter("maxLon", longitude+approx);
+        q.setParameter("minLat", lattitude - approx);
+        q.setParameter("maxLat", lattitude + approx);
+        q.setParameter("minLon", longitude - approx);
+        q.setParameter("maxLon", longitude + approx);
         Collection<LocationsTime> lTL = q.getResultList();
         return lTL;
     }
-    
+
     /*
     Datamanipulation:
-    */
-    
-    public LocationsTime addLocationsTime(LocationsTime lT){
+     */
+    public LocationsTime addLocationsTime(LocationsTime lT) {
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
             em.persist(lT);
             em.getTransaction().commit();
             return lT;
-        }finally{
+        } finally {
             em.close();
         }
     }
-    
-    public LocationsTime deleteById(int id){
+
+    public LocationsTime deleteById(int id) {
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
-            LocationsTime lT = em.find(LocationsTime.class,(Integer) id);
+            LocationsTime lT = em.find(LocationsTime.class, (Integer) id);
             em.remove(lT);
             em.getTransaction().commit();
             return lT;
-        }finally{
+        } finally {
             em.close();
         }
     }

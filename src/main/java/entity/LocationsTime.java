@@ -58,9 +58,9 @@ public class LocationsTime implements Serializable {
     @Column(name = "ends_at")
     private Integer endsAt;
     @Column(name = "loc_longitude")
-    private Integer locLongitude;
+    private double locLongitude;
     @Column(name = "loc_latitude")
-    private Integer locLatitude;
+    private double locLatitude;
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cars carId;
@@ -112,19 +112,19 @@ public class LocationsTime implements Serializable {
         this.endsAt = endsAt;
     }
 
-    public Integer getLocLongitude() {
+    public double getLocLongitude() {
         return locLongitude;
     }
 
-    public void setLocLongitude(Integer locLongitude) {
+    public void setLocLongitude(double locLongitude) {
         this.locLongitude = locLongitude;
     }
 
-    public Integer getLocLatitude() {
+    public double getLocLatitude() {
         return locLatitude;
     }
 
-    public void setLocLatitude(Integer locLatitude) {
+    public void setLocLatitude(double locLatitude) {
         this.locLatitude = locLatitude;
     }
 

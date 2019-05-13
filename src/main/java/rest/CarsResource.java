@@ -74,8 +74,9 @@ public class CarsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") int id) {
         Cars c = cF.getCarById(id);
+        CarsDTO cdto = new CarsDTO(c);
 
-        return Response.ok().entity(gson.toJson(c)).build();
+        return Response.ok().entity(gson.toJson(cdto)).build();
     }
 
     @GET

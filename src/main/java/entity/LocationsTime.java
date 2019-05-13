@@ -30,10 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "LocationsTime.findAll", query = "SELECT l FROM LocationsTime l")
-    , @NamedQuery(name = "LocationsTime.findByTimeAndStatus", query ="SELECT l FROM LocationsTime l WHERE l.status = :status AND l.startsAt < :startsAt AND l.endsAt > :endsAt")
+    , @NamedQuery(name = "LocationsTime.findByTimeAndStatus", query ="SELECT l FROM LocationsTime l WHERE l.carStatus = :status AND l.startsAt < :startsAt AND l.endsAt > :endsAt")
     , @NamedQuery(name = "LocationsTime.findById", query = "SELECT l FROM LocationsTime l WHERE l.id = :id")
     , @NamedQuery(name = "LocationsTime.findByName", query = "SELECT l FROM LocationsTime l WHERE l.name = :name")
-    , @NamedQuery(name = "LocationsTime.findByStatus", query = "SELECT l FROM LocationsTime l WHERE l.status = :status")
+    , @NamedQuery(name = "LocationsTime.findByStatus", query = "SELECT l FROM LocationsTime l WHERE l.carStatus = :status")
     , @NamedQuery(name = "LocationsTime.findByStartsAt", query = "SELECT l FROM LocationsTime l WHERE l.startsAt = :startsAt")
     , @NamedQuery(name = "LocationsTime.findByEndsAt", query = "SELECT l FROM LocationsTime l WHERE l.endsAt = :endsAt")
     , @NamedQuery(name = "LocationsTime.findByLocLongitude", query = "SELECT l FROM LocationsTime l WHERE l.locLongitude = :locLongitude")
@@ -51,8 +51,8 @@ public class LocationsTime implements Serializable {
     @Column(name = "name")
     private String name;
     @Size(max = 255)
-    @Column(name = "status")
-    private String status;
+    @Column(name = "car_status")
+    private String carStatus;
     @Column(name = "starts_at")
     private Integer startsAt;
     @Column(name = "ends_at")
@@ -89,11 +89,11 @@ public class LocationsTime implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return carStatus;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.carStatus = status;
     }
 
     public Integer getStartsAt() {

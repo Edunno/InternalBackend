@@ -102,42 +102,43 @@ public class CarsFacade {
         EntityManager em = emf.createEntityManager();
         String resp = "SELECT c FROM Cars c";
         boolean flag = true;
-        if (!((dstart == 0) && (dend == 0)) && flag) {
-            resp += " JOIN c.locationsTimeCollection a WHERE a.startsAt <= :dstart AND a.endsAt >= :dend";//Add AND a.(status) = Occupied
+        if (!((dstart == null) && (dend == null)) && flag) {
+            resp += " JOIN c.locationsTimeCollection a WHERE a.startsAt <= :dstart AND a.endsAt >= :dend AND a.carStatus = :Available";//Add AND a.(status) = Occupied
             flag = false;
         }
         System.out.println(resp);
-        if (!brand.isEmpty() && flag) {
+        if (!(brand == null) && flag) {
             flag = false;
             resp += " WHERE c.brand = :brand";
-        } else if (!brand.isEmpty()) {
+        } else if (!(brand == null)) {
             resp += " AND c.brand = :brand";
         }
-        if (!model.isEmpty() && flag) {
+        if (!(model == null) && flag) {
             resp += " WHERE c.model = :model";
             flag = false;
-        } else if (!model.isEmpty()) {
+        } else if (!(model == null)) {
             resp += " AND c.model = :model";
         }
-        if (!pClass.isEmpty() && flag) {
+        if (!(pClass == null) && flag) {
             resp += " WHERE c.priceClass = :priceClass";
-        } else if (!pClass.isEmpty()) {
+        } else if (!(pClass == null)) {
             resp += " AND c.priceClass = :priceClass";
         }
         System.out.println(resp);
         Query q = em.createQuery(resp);
-        if (!model.isEmpty()) {
+        if (!(model == null)) {
             q.setParameter("model", model);
         }
-        if (!brand.isEmpty()) {
+        if (!(brand == null)) {
             q.setParameter("brand", brand);
         }
-        if (!pClass.isEmpty()) {
+        if (!(pClass == null)) {
             q.setParameter("priceClass", pClass);
         }
-        if (!((dstart == 0) && (dend == 0))) {
+        if (!((dstart == null) && (dend == null))) {
             q.setParameter("dend", dend);
             q.setParameter("dstart", dstart);
+            q.setParameter("Available", "Available");
         }
         Collection<Cars> cRes = q.getResultList();
         return cRes;

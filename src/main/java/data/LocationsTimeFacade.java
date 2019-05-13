@@ -40,7 +40,7 @@ public class LocationsTimeFacade {
         lt.setCarId(cf.getCarById(1));
         lt.setStartsAt(20190505);
         lt.setEndsAt(20190506);
-        lt.setStatus("Occupied");
+        lt.setStatus("Available");
         lt.setLocLatitude(55.630171);
         lt.setLocLongitude(12.654341);
         addLocationsTime(lt);

@@ -151,9 +151,9 @@ public class CarsResource {
             @QueryParam("distmax") int distmax,
             @QueryParam("distmin") int distmin) {
         Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin);
-        ArrayList<Cars> resp = new ArrayList();
+        ArrayList<CarsDTO> resp = new ArrayList();
         for(Cars c : cCol){
-            resp.add(c);
+            resp.add(new CarsDTO(c));
         }
         return Response.ok().entity(gson.toJson(resp)).build();
     }

@@ -2,6 +2,7 @@
 package data;
 
 import entity.Cars;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,6 +18,18 @@ public class CarsFacade {
 
     private static EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
     private static CarsFacade instance;
+
+//    public static void main(String[] args) {
+//        CarsFacade cF = new CarsFacade();
+//        Collection<Cars> cL = cF.getMultiSearch("", "", "", 20190506, 20190506, 0, 0);
+//        ArrayList<Cars> cA = new ArrayList();
+//        for (Cars c : cL) {
+//            cA.add(c);
+//        }
+//        for (Cars c : cA) {
+//            System.out.println(c.getBrand());
+//        }
+//    }
 
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;
@@ -85,14 +98,15 @@ public class CarsFacade {
         return carList;
     }
 
-    public Collection<Cars> getMultiSearch(String brand, String model, int prmax, int prmin, Integer dstart, Integer dend, int distmax, int distmin) {
+    public Collection<Cars> getMultiSearch(String brand, String model, String pClass, Integer dstart, Integer dend, int distmax, int distmin) {
         EntityManager em = emf.createEntityManager();
         String resp = "SELECT c FROM Cars c";
         boolean flag = true;
-        if (!((dstart == null) && (dend == null)) && flag) {
-            resp += " NATURAL JOIN LocationsTime b WHERE c.b.starts_at >= :dstart AND c.b.ends_at <= :dend AND c.b.status = Available";
+        if (!((dstart == 0) && (dend == 0)) && flag) {
+            resp += " JOIN c.locationsTimeCollection a WHERE a.startsAt <= :dstart AND a.endsAt >= :dend";//Add AND a.(status) = Occupied
             flag = false;
         }
+        System.out.println(resp);
         if (!brand.isEmpty() && flag) {
             flag = false;
             resp += " WHERE c.brand = :brand";
@@ -105,7 +119,28 @@ public class CarsFacade {
         } else if (!model.isEmpty()) {
             resp += " AND c.model = :model";
         }
-        return null;
+        if (!pClass.isEmpty() && flag) {
+            resp += " WHERE c.priceClass = :priceClass";
+        } else if (!pClass.isEmpty()) {
+            resp += " AND c.priceClass = :priceClass";
+        }
+        System.out.println(resp);
+        Query q = em.createQuery(resp);
+        if (!model.isEmpty()) {
+            q.setParameter("model", model);
+        }
+        if (!brand.isEmpty()) {
+            q.setParameter("brand", brand);
+        }
+        if (!pClass.isEmpty()) {
+            q.setParameter("priceClass", pClass);
+        }
+        if (!((dstart == 0) && (dend == 0))) {
+            q.setParameter("dend", dend);
+            q.setParameter("dstart", dstart);
+        }
+        Collection<Cars> cRes = q.getResultList();
+        return cRes;
 
     }
 

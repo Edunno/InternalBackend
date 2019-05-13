@@ -144,14 +144,17 @@ public class CarsResource {
     public Response makeQuery(
             @QueryParam("brand") String brand,
             @QueryParam("model") String model,
-            @QueryParam("prmax") int prmax,
-            @QueryParam("prmin") int prmin,
+            @QueryParam("prmax") String pClass,
             @QueryParam("dstart") Integer dstart,
             @QueryParam("dend") Integer dend,
             @QueryParam("distmax") int distmax,
             @QueryParam("distmin") int distmin) {
-        cF.getMultiSearch(brand, model, prmax, prmin, dstart, dend, distmax, distmin);
-        return null;
+        Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin);
+        ArrayList<Cars> resp = new ArrayList();
+        for(Cars c : cCol){
+            resp.add(c);
+        }
+        return Response.ok().entity(gson.toJson(resp)).build();
     }
 
     /**

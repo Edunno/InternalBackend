@@ -145,9 +145,9 @@ public class CarsResource {
     public Response makeQuery(
             @QueryParam("brand") String brand,
             @QueryParam("model") String model,
-            @QueryParam("prmax") String pClass,
-            @QueryParam("dstart") Integer dstart,
-            @QueryParam("dend") Integer dend,
+            @QueryParam("priceclass") String pClass,
+            @QueryParam("startdate") Integer dstart,
+            @QueryParam("enddate") Integer dend,
             @QueryParam("distmax") int distmax,
             @QueryParam("distmin") int distmin) {
         Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin);

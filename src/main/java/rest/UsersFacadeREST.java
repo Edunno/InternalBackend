@@ -57,14 +57,14 @@ public class UsersFacadeREST {
     @RolesAllowed("admin")
     public Response getAllUsers() {
         
-           String hi = "{\"msg\":\"response from server\"}";
-//        ArrayList<UsersDTO> uList = new ArrayList();
-//        for (Users u : (Collection<Users>) uf.getAllUsers()) {
-//            UsersDTO nUser = new UsersDTO(u);
-//            uList.add(nUser);
-//        }
-//        return Response.ok().entity(gson.toJson(uList)).build();
-        return Response.ok().entity(hi).build();
+//           String hi = "{\"msg\":\"response from server\"}";
+        ArrayList<UsersDTO> uList = new ArrayList();
+        for (Users u : (Collection<Users>) uf.getAllUsers()) {
+            UsersDTO nUser = new UsersDTO(u);
+            uList.add(nUser);
+        }   
+        return Response.ok().entity(gson.toJson(uList)).build();
+//        return Response.ok().entity(hi).build();
     }
 
     @GET

@@ -54,12 +54,15 @@ public class UsersFacadeREST {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
-        ArrayList<UsersDTO> uList = new ArrayList();
-        for (Users u : (Collection<Users>) uf.getAllUsers()) {
-            UsersDTO nUser = new UsersDTO(u);
-            uList.add(nUser);
-        }
-        return Response.ok().entity(gson.toJson(uList)).build();
+        
+           String hi = "{\"msg\":\"response from server\"}";
+//        ArrayList<UsersDTO> uList = new ArrayList();
+//        for (Users u : (Collection<Users>) uf.getAllUsers()) {
+//            UsersDTO nUser = new UsersDTO(u);
+//            uList.add(nUser);
+//        }
+//        return Response.ok().entity(gson.toJson(uList)).build();
+        return Response.ok().entity(hi).build();
     }
 
     @GET

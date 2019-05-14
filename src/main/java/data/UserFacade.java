@@ -57,10 +57,10 @@ public class UserFacade {
         return userList;
     }
 
-    public Users getUserById(int id) {
+    public Users getUserByUsername(String username) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Users.findById");
-        q.setParameter("id", id);
+        Query q = em.createNamedQuery("Users.findByUserName");
+        q.setParameter("username", username);
         Users u = (Users) q.getResultList().get(0);
         return u;
     }

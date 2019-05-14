@@ -68,12 +68,12 @@ public class UsersFacadeREST {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("admin")
-    public Response getById(@PathParam("id") int id) {
+    public Response getById(@PathParam("username") String username) {
 
-        Users u = uf.getUserById(id);
+        Users u = uf.getUserByUsername(username);
         UsersDTO udto = new UsersDTO(u);
         
         return Response.ok().entity(gson.toJson(udto)).build();

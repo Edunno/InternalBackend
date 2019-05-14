@@ -50,16 +50,6 @@ public class UsersFacadeREST {
     public UsersFacadeREST() {
     }
 
-//    @GET
-//    @Path("/brand/{brand}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getByBrand(@PathParam("brand") String brand) {
-//        ArrayList<CarsDTO> resP = new ArrayList();
-//        for (Cars c : (Collection<Cars>) cF.getByBrand(brand)) {
-//            resP.add(new CarsDTO(c));
-//        }
-//        return Response.ok().entity(gson.toJson(resP)).build();
-//    }
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)

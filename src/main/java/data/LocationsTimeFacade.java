@@ -14,6 +14,13 @@ import utility.PuSelector;
 
 /**
  * @author Esben All rights belong to respective contributors.
+ * 
+ * Latitude - Longitude destinationer
+ *55.629327 - 12.653356 KBH Lufthavn
+ *55.695200 - 12.595645 KBH K
+ *56.151684 - 10.199153 Århus
+ *57.042907 - 9.922126 Aalborg
+ * 
  */
 public class LocationsTimeFacade {
 

@@ -155,6 +155,8 @@ public class CarsResource {
             @QueryParam("distmin") int distmin,
             @QueryParam("latitude") double latitude,
             @QueryParam("longitude") double longitude) {
+        
+        testParameters(brand,model,pClass,dstart,dend,distmax,distmin,latitude,longitude);
         Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin, latitude,longitude);
         ArrayList<CarsDTO> resp = new ArrayList();
         for(Cars c : cCol){
@@ -171,5 +173,9 @@ public class CarsResource {
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {
+    }
+
+    private void testParameters(String brand, String model, String pClass, Integer dstart, Integer dend, int distmax, int distmin, double latitude, double longitude) {
+        
     }
 }

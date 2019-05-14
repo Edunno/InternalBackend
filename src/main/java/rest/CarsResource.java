@@ -149,8 +149,10 @@ public class CarsResource {
             @QueryParam("startdate") Integer dstart,
             @QueryParam("enddate") Integer dend,
             @QueryParam("distmax") int distmax,
-            @QueryParam("distmin") int distmin) {
-        Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin);
+            @QueryParam("distmin") int distmin,
+            @QueryParam("latitude") double latitude,
+            @QueryParam("longitude") double longitude) {
+        Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin, latitude,longitude);
         ArrayList<CarsDTO> resp = new ArrayList();
         for(Cars c : cCol){
             resp.add(new CarsDTO(c));

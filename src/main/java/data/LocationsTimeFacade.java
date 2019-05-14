@@ -36,14 +36,29 @@ public class LocationsTimeFacade {
     void addLocTimeTest() {
         LocationsTime lt = new LocationsTime();
         CarsFacade cf = new CarsFacade();
+
+//        lt.setCarId(cf.getCarById(2));
+//        lt.setStartsAt(20180505);
+//        lt.setEndsAt(20190506);
+//        lt.setStatus("Available");
+//        lt.setLocLatitude(55.630171);
+//        lt.setLocLongitude(12.654341);
+//        lt.setCarId(cf.getCarById(3));
+//        lt.setStartsAt(20190705);
+//        lt.setEndsAt(20190906);
+//        lt.setStatus("Available");
+//        lt.setLocLatitude(55.630171);
+//        lt.setLocLongitude(12.654341);
+//        addLocationsTime(lt);
         
-        lt.setCarId(cf.getCarById(1));
-        lt.setStartsAt(20190505);
-        lt.setEndsAt(20190506);
-        lt.setStatus("Available");
-        lt.setLocLatitude(55.630171);
-        lt.setLocLongitude(12.654341);
-        addLocationsTime(lt);
+        LocationsTime lf = new LocationsTime();
+        lf.setCarId(cf.getCarById(5));
+        lf.setStartsAt(20170505);
+        lf.setEndsAt(20190930);
+        lf.setStatus("Available");
+        lf.setLocLatitude(55.630171);
+        lf.setLocLongitude(12.654341);
+        addLocationsTime(lf);
     }
 
     public void addEntityManager(EntityManagerFactory emf) {

@@ -98,7 +98,7 @@ public class CarsFacade {
         return carList;
     }
 
-    public Collection<Cars> getMultiSearch(String brand, String model, String pClass, Integer dstart, Integer dend, int distmax, int distmin) {
+    public Collection<Cars> getMultiSearch(String brand, String model, String pClass, Integer dstart, Integer dend, int distmax, int distmin, double latitude, double longitude) {
         EntityManager em = emf.createEntityManager();
         String resp = "SELECT c FROM Cars c";
         boolean flag = true;
@@ -107,6 +107,12 @@ public class CarsFacade {
             flag = false;
         }
         System.out.println(resp);
+        if(!((latitude == 0) &&(longitude == 0)) && flag){
+            resp += " JOIN c.locationsTimeCollection a WHERE a.locLongitude = :longitude AND a.locLatitude >= :latitude AND a.carStatus = :Available";
+            flag = false;
+        }else if(!((latitude == 0) &&(longitude == 0))){
+            resp += " AND a.locLongitude = :longitude AND a.locLatitude >= :latitude";
+        }
         if (!(brand == null) && flag) {
             flag = false;
             resp += " WHERE c.brand = :brand";
@@ -139,6 +145,10 @@ public class CarsFacade {
             q.setParameter("dend", dend);
             q.setParameter("dstart", dstart);
             q.setParameter("Available", "Available");
+        }
+        if(!((latitude == 0) &&(longitude == 0))){
+            q.setParameter("longitude", longitude);
+            q.setParameter("latitude", latitude);
         }
         Collection<Cars> cRes = q.getResultList();
         return cRes;

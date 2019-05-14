@@ -18,6 +18,7 @@ import static java.lang.System.console;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -53,6 +54,7 @@ public class UsersFacadeREST {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
     public Response getAllUsers() {
         
            String hi = "{\"msg\":\"response from server\"}";
@@ -68,6 +70,7 @@ public class UsersFacadeREST {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
     public Response getById(@PathParam("id") int id) {
 
         Users u = uf.getUserById(id);

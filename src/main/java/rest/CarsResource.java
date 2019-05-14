@@ -14,6 +14,7 @@ import entity.LocationsTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -126,7 +127,8 @@ public class CarsResource {
 //    }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postPerson(String content) {
+    @RolesAllowed("admin")
+    public void postCar(String content) {
         Cars c = gson.fromJson(content, Cars.class);
         cF.addCar(c);
     }
@@ -134,6 +136,7 @@ public class CarsResource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
     public Response deleteCarByID(@PathParam("id") int id) {
         Cars c = cF.deleteCarByID(id);
         return Response.ok().entity(gson.toJson(c)).build();

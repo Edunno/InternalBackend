@@ -141,6 +141,16 @@ public class CarsResource {
         Cars c = cF.deleteCarByID(id);
         return Response.ok().entity(gson.toJson(c)).build();
     }
+    
+        @POST
+    @Path("/period")
+    @RolesAllowed("user")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void postLocTime(String content) {
+        LocationsTime locT = gson.fromJson(content, LocationsTime.class);
+        LocationsTimeFacade lF = new LocationsTimeFacade();
+        lF.addLocationsTime(locT);
+    }
 
     @GET
     @Path("/query")

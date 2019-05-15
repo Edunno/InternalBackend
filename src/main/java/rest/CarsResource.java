@@ -14,6 +14,8 @@ import entity.LocationsTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -115,6 +117,17 @@ public class CarsResource {
         return Response.ok().entity(gson.toJson(resp)).build();
     }
 
+    @GET
+    @Path("/fetch")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fetchedCars() throws InterruptedException, ExecutionException {
+        RequestURL ru = new RequestURL();
+        List<String> ruList = ru.runParallelCharacters();
+        
+        
+        return Response.ok(ruList).build();
+    }
+
 //    @GET
 //    @Path("/pricemax/{maxPrice}")
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -169,7 +182,7 @@ public class CarsResource {
         testParameters(brand,model,pClass,dstart,dend,distmax,distmin,latitude,longitude);
         Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin, latitude,longitude);
         ArrayList<CarsDTO> resp = new ArrayList();
-        for(Cars c : cCol){
+        for (Cars c : cCol) {
             resp.add(new CarsDTO(c));
         }
         return Response.ok().entity(gson.toJson(resp)).build();

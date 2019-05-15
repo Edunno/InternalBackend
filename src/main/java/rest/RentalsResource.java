@@ -49,6 +49,7 @@ public class RentalsResource {
     }
     
     @POST
+    @Path("/addrental")
     @Consumes(MediaType.APPLICATION_JSON)
     public void postNewRental(String content){
         Rentals r = gson.fromJson(content, Rentals.class);

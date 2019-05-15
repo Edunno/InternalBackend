@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Rentals.findAll", query = "SELECT r FROM Rentals r")
     , @NamedQuery(name = "Rentals.findById", query = "SELECT r FROM Rentals r WHERE r.id = :id")
-    , @NamedQuery(name = "Rentals.findByStatus", query = "SELECT r FROM Rentals r WHERE r.status = :status")
+    , @NamedQuery(name = "Rentals.findByStatus", query = "SELECT r FROM Rentals r WHERE r.rentalStatus = :status")
     , @NamedQuery(name = "Rentals.findByStartsAt", query = "SELECT r FROM Rentals r WHERE r.startsAt = :startsAt")
     , @NamedQuery(name = "Rentals.findByEndsAt", query = "SELECT r FROM Rentals r WHERE r.endsAt = :endsAt")})
 public class Rentals implements Serializable {
@@ -45,14 +45,12 @@ public class Rentals implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 255)
-    @Column(name = "status")
-    private String status;
+    @Column(name = "rentalstatus")
+    private String rentalStatus;
     @Column(name = "starts_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startsAt;
+    private Integer startsAt;
     @Column(name = "ends_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endsAt;
+    private Integer endsAt;
     @JoinTable(name = "rental_has_car", joinColumns = {
         @JoinColumn(name = "rental_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "product_id", referencedColumnName = "id")})
@@ -78,26 +76,26 @@ public class Rentals implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return rentalStatus;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.rentalStatus = status;
     }
 
-    public Date getStartsAt() {
+    public Integer getStartsAt() {
         return startsAt;
     }
 
-    public void setStartsAt(Date startsAt) {
+    public void setStartsAt(Integer startsAt) {
         this.startsAt = startsAt;
     }
 
-    public Date getEndsAt() {
+    public Integer getEndsAt() {
         return endsAt;
     }
 
-    public void setEndsAt(Date endsAt) {
+    public void setEndsAt(Integer endsAt) {
         this.endsAt = endsAt;
     }
 

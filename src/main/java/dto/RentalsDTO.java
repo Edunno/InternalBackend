@@ -16,8 +16,8 @@ public class RentalsDTO {
 
     int id;
     String status;
-    Date startsAt;
-    Date endsAt;
+    int startsAt;
+    int endsAt;
     ArrayList<CarsDTO> carsCollection;
     String userName;
 
@@ -59,19 +59,19 @@ public class RentalsDTO {
         this.status = status;
     }
 
-    public Date getStartsAt() {
+    public int getStartsAt() {
         return startsAt;
     }
 
-    public void setStartsAt(Date startsAt) {
+    public void setStartsAt(int startsAt) {
         this.startsAt = startsAt;
     }
 
-    public Date getEndsAt() {
+    public int getEndsAt() {
         return endsAt;
     }
 
-    public void setEndsAt(Date endsAt) {
+    public void setEndsAt(int endsAt) {
         this.endsAt = endsAt;
     }
 

@@ -103,12 +103,12 @@ public class CarsFacade {
         String resp = "SELECT c FROM Cars c";
         boolean flag = true;
         if (!((dstart == null) && (dend == null)) && flag) {
-            resp += " JOIN c.locationsTimeCollection a WHERE a.startsAt <= :dstart AND a.endsAt >= :dend AND a.carStatus = :Available";//Add AND a.(status) = Occupied
+            resp += " JOIN c.locationsTimeCollection a WHERE NOT (a.endsAt >= :dstart AND a.startsAt <= :dend)";//Add AND a.(status) = Occupied
             flag = false;
         }
         System.out.println(resp);
         if(!((latitude == 0) &&(longitude == 0)) && flag){
-            resp += " JOIN c.locationsTimeCollection a WHERE a.locLongitude = :longitude AND a.locLatitude >= :latitude AND a.carStatus = :Available";
+            resp += " JOIN c.locationsTimeCollection a WHERE a.locLongitude = :longitude AND a.locLatitude >= :latitude";
             flag = false;
         }else if(!((latitude == 0) &&(longitude == 0))){
             resp += " AND a.locLongitude = :longitude AND a.locLatitude >= :latitude";
@@ -144,7 +144,6 @@ public class CarsFacade {
         if (!((dstart == null) && (dend == null))) {
             q.setParameter("dend", dend);
             q.setParameter("dstart", dstart);
-            q.setParameter("Available", "Available");
         }
         if(!((latitude == 0) &&(longitude == 0))){
             q.setParameter("longitude", longitude);

@@ -6,9 +6,11 @@
 package rest;
 
 import com.google.gson.stream.JsonReader;
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.Callable;
 
@@ -33,12 +35,14 @@ public class FetchResourceCallable implements Callable<String>{
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json;charset=UTF-8");
         con.setRequestProperty("User-Agent", "server");
-        JsonReader reader = new JsonReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
-        String jsonStr = null;
-        if (reader.hasNext()) {
-            jsonStr += reader.nextString();
-        }
-        reader.close();
+        String line;
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"))) {	
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuilder.append(line);
+		}
+	}
+        String jsonStr = stringBuilder.toString();
         System.out.println(jsonStr);
         return jsonStr;
        

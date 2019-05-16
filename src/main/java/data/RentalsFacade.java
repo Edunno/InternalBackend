@@ -2,7 +2,10 @@
 
 package data;
 
+import entity.Cars;
 import entity.Rentals;
+import entity.Users;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +18,29 @@ import utility.PuSelector;
  * All rights belong to respective contributors.
  */
 public class RentalsFacade {
+    
+    public static void main(String[] args) {
+        RentalsFacade rf = new RentalsFacade();
+        rf.addTestRental();
+        
+    }
+    
     EntityManagerFactory emf = PuSelector.getEntityManagerFactory("pu");
+    
+    void addTestRental(){
+        CarsFacade cf = new CarsFacade();
+        UserFacade uf = new UserFacade();
+        
+        Rentals newR = new Rentals();
+        Collection<Cars> hygge = new ArrayList<Cars>();
+        hygge.add(cf.getCarById(1));
+        newR.setCarsCollection(hygge);
+        newR.setStartsAt(20190520);
+        newR.setEndsAt(20190620);
+        Users u = uf.getUserByUsername("user");
+        newR.setUserName(u);
+        addRental(newR);
+    }
 
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;

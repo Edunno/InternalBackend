@@ -18,7 +18,7 @@ public class RentalsDTO {
     String status;
     int startsAt;
     int endsAt;
-    ArrayList<CarsDTO> carsCollection;
+    ArrayList<Integer> carsCollection;
     String userName;
 
     public RentalsDTO() {
@@ -31,11 +31,11 @@ public class RentalsDTO {
         this.status = a.getStatus();
         this.startsAt= a.getStartsAt();
         this.endsAt = a.getEndsAt();
-        if(!a.getCarsCollection().isEmpty()){
-            for(Cars aC : a.getCarsCollection()){
-                this.carsCollection.add(new CarsDTO(aC));
-            }
-        }
+//        if(!a.getCarsCollection().isEmpty()){
+//            for(Cars aC : a.getCarsCollection()){
+//                this.carsCollection.add(aC.getId());
+//            }
+//        }
         this.userName = a.getUserName().getUserName();
     }
 
@@ -43,11 +43,11 @@ public class RentalsDTO {
         return id;
     }
 
-    public ArrayList<CarsDTO> getCarsCollection() {
+    public ArrayList<Integer> getCarsCollection() {
         return carsCollection;
     }
 
-    public void setCarsCollection(ArrayList<CarsDTO> carsCollection) {
+    public void setCarsCollection(ArrayList<Integer> carsCollection) {
         this.carsCollection = carsCollection;
     }
 

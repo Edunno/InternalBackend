@@ -122,9 +122,8 @@ public class CarsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response fetchedCars() throws InterruptedException, ExecutionException {
         RequestURL ru = new RequestURL();
-        String sCar = ru.runParallelCharacters().get(0);
-        Cars car = gson.fromJson(sCar, Cars.class);
-        return Response.ok().entity(car).build();
+        List<String> sCar = ru.runParallelCharacters();
+        return Response.ok().entity(sCar).build();
     }
 
 //    @GET

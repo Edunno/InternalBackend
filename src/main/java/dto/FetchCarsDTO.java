@@ -21,12 +21,12 @@ public class FetchCarsDTO {
     RequestURL ru = new RequestURL();
     
     
-    public List<Cars> fetchedCars() throws InterruptedException, ExecutionException{
+    public List<CarsDTO> fetchedCars() throws InterruptedException, ExecutionException{
         
         List<String> ruList = ru.runParallelCharacters();
         for (String car : ruList) {
             Collection<Cars> cList =  new ArrayList();
-           // cList.add(car);
+            //cList.add(car);
             
         }
         

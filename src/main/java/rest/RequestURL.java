@@ -32,5 +32,10 @@ public class RequestURL {
         }
         return urlStr;
     }
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        RequestURL ru = new RequestURL();
+        List<String> ruq = ru.runParallelCharacters();
+        System.out.println(ruq);
+    }
 }
     

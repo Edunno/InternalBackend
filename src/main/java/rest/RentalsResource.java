@@ -7,6 +7,7 @@ import data.CarsFacade;
 import data.LocationsTimeFacade;
 import data.RentalsFacade;
 import dto.CarsDTO;
+import dto.RentalsDTO;
 import entity.Cars;
 import entity.LocationsTime;
 import entity.Rentals;
@@ -67,5 +68,18 @@ public class RentalsResource {
         }
         rF.addRental(r);
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllRentals() {
+        ArrayList<RentalsDTO> resultlist = new ArrayList();
+        for (Rentals r : (Collection<Rentals>) rF.getAll()) {
+            RentalsDTO rent = new RentalsDTO(r);
+//            nCar.cleanLists();
+            resultlist.add(rent);
+        }
+        return Response.ok().entity(gson.toJson(resultlist)).build();
+    }
+
 
 }

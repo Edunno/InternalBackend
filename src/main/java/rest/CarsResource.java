@@ -7,10 +7,12 @@ package rest;
 
 import com.google.gson.Gson;
 import data.CarsFacade;
+import data.JSONReader;
 import data.LocationsTimeFacade;
 import dto.CarsDTO;
 import entity.Cars;
 import entity.LocationsTime;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -47,6 +49,7 @@ public class CarsResource {
     SecurityContext securityContext;
     Gson gson = new Gson();
     CarsFacade cF = new CarsFacade();
+    JSONReader jr = new JSONReader();
 
     /**
      * Creates a new instance of CarsResource
@@ -62,11 +65,10 @@ public class CarsResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCars() {
+    public Response getAllCars() throws IOException {
         ArrayList<CarsDTO> resP = new ArrayList();
         for (Cars c : (Collection<Cars>) cF.getAllCars()) {
             CarsDTO nCar = new CarsDTO(c);
-//            nCar.cleanLists();
             resP.add(nCar);
         }
         return Response.ok().entity(gson.toJson(resP)).build();
@@ -75,10 +77,14 @@ public class CarsResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getById(@PathParam("id") int id) {
-        Cars c = cF.getCarById(id);
-        CarsDTO cdto = new CarsDTO(c);
-
+    public Response getById(@PathParam("id") String id) throws IOException {
+        CarsDTO cdto;
+        if (Character.isLetter(id.charAt(0))) {
+            cdto = jr.fetchSingleFromDueinator(id);
+        } else {
+            Cars c = cF.getCarById(Integer.parseInt(id));
+            cdto = new CarsDTO(c);
+        }
         return Response.ok().entity(gson.toJson(cdto)).build();
     }
 
@@ -120,10 +126,19 @@ public class CarsResource {
     @GET
     @Path("/fetch")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response fetchedCars() throws InterruptedException, ExecutionException {
-        RequestURL ru = new RequestURL();
-        List<String> sCar = ru.runParallelCharacters();
-        return Response.ok().entity(sCar).build();
+    public Response fetchedCars() throws InterruptedException, ExecutionException, IOException {
+        ArrayList<CarsDTO> resP = new ArrayList();
+        int lastID = 1;
+        for (Cars c : (Collection<Cars>) cF.getAllCars()) {
+            CarsDTO nCar = new CarsDTO(c);
+            resP.add(nCar);
+            lastID = c.getId();
+        }
+
+        ArrayList<CarsDTO> externalCars = new ArrayList();
+        externalCars = jr.fetchAllFromDueinator(lastID + 1);
+        resP.addAll(externalCars);
+        return Response.ok().entity(gson.toJson(resP)).build();
     }
 
 //    @GET
@@ -152,8 +167,8 @@ public class CarsResource {
         Cars c = cF.deleteCarByID(id);
         return Response.ok().entity(gson.toJson(c)).build();
     }
-    
-        @POST
+
+    @POST
     @Path("/period")
     @RolesAllowed("user")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -176,9 +191,9 @@ public class CarsResource {
             @QueryParam("distmin") int distmin,
             @QueryParam("latitude") double latitude,
             @QueryParam("longitude") double longitude) {
-        
-        testParameters(brand,model,pClass,dstart,dend,distmax,distmin,latitude,longitude);
-        Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin, latitude,longitude);
+
+        testParameters(brand, model, pClass, dstart, dend, distmax, distmin, latitude, longitude);
+        Collection<Cars> cCol = cF.getMultiSearch(brand, model, pClass, dstart, dend, distmax, distmin, latitude, longitude);
         ArrayList<CarsDTO> resp = new ArrayList();
         for (Cars c : cCol) {
             resp.add(new CarsDTO(c));
@@ -197,6 +212,6 @@ public class CarsResource {
     }
 
     private void testParameters(String brand, String model, String pClass, Integer dstart, Integer dend, int distmax, int distmin, double latitude, double longitude) {
-        
+
     }
 }

@@ -19,6 +19,7 @@ public class CarsDTO {
     String model;
     String comments;
     String pyear;
+    String regno;
     ArrayList<RentalsDTO> rentalList = new ArrayList();
     ArrayList<LocationsTimeDTO> locationTimeList = new ArrayList();
 
@@ -44,10 +45,24 @@ public class CarsDTO {
 
     public CarsDTO() {
     }
+
+    public String getRegno() {
+        return regno;
+    }
+
+    public void setRegno(String regno) {
+        this.regno = regno;
+    }
+    
+    
     
     
     public int getId(){
         return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getPriceClass() {
@@ -94,8 +109,8 @@ public class CarsDTO {
         return pyear;
     }
 
-    public void setYear(String year) {
-        this.pyear = year;
+    public void setYear(String pyear) {
+        this.pyear = pyear;
     }
 
     public ArrayList<RentalsDTO> getRentalList() {
